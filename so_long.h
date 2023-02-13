@@ -42,8 +42,7 @@ typedef struct s_map
 typedef struct	s_data {
 	void	*mlx;
 	void	*win;
-	t_map	*map;
-	char	*addr;
+	t_map	map;
 }				t_data;
 
 #endif
