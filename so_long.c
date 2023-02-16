@@ -307,6 +307,19 @@ void render_map(t_data *data)
 	}
 }
 
+char    *ft_strcpy(char *s1, char *s2)
+  {
+      int i;
+ 
+      i = 0;
+      while (s2[i])
+      {
+          s1[i] = s2[i];
+	  i++;
+      }
+      s1[i] = s2[i];
+      return (s1);
+  }
 int verificar_ber(char *str)
 {
 	int i;
@@ -315,18 +328,22 @@ int verificar_ber(char *str)
 
 	i = 0;
 	frase = malloc(5 * sizeof(char));
-	frase = ".ber";
+	ft_strcpy(frase,".ber");
 	while(str[i] != '\0')
 	{
 		k = 0;
 		while(str[i+k] == frase[k])
 		{
 			if(frase[k+1] == '\0')
+			{
+				free(frase);
 				return (0);
+			}
 			k++;
 		}
 		i++;
 	}
+	free(frase);
 	return(1);
 }
 

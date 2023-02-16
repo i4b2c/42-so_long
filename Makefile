@@ -81,3 +81,7 @@ re: extra all
 
 ez: 
 		@$(CC) $(CFLAGS) so_long.c libft.a $(LIBSRC) $(LIBFLAG) -o so_long
+git:
+	git add *
+	git commit -m .
+	git push
