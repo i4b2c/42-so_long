@@ -50,5 +50,6 @@ typedef struct s_data
 char	ler_o_xpm(int fd);
 void	render_map(t_data *data);
 void	encerrar_jogo(t_data *data);
+void	encerrar_jogo_erro(t_data *data);
 
 #endif

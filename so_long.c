@@ -161,18 +161,15 @@ int	key_handler(int keycode, t_data *data)
 	else if (keycode == W && check_key(data, W) != 1)
 		mudar_letra(data, -1, 0, op);
 	else if (keycode == ESC)
-	{
-		mlx_destroy_window(data->mlx, data->win);
-		exit(0);
-	}
+		encerrar_jogo(data);
 	render_map(data);
 	return (0);
 }
 
-int	mouse_hook(void)
+int	mouse_hook(t_data *data)
 {
+	encerrar_jogo(data);
 	exit(0);
-	return (0);
 }
 
 char	ler_o_xpm(int fd)
@@ -289,11 +286,7 @@ void	render_map(t_data *data)
 		{
 			op = options_map(data, k, i);
 			if (op == -1)
-			{
-				mlx_destroy_window(data->mlx, data->win);
-				printf("Error\n");
-				exit(0);
-			}
+				encerrar_jogo_erro(data);
 			put_imagem(data, op, i, k);
 			i++;
 		}
@@ -441,7 +434,7 @@ int	main(int ac,	char **av)
 			encerrar_jogo_erro(&data);
 		data.win = mlx_new_window(data.mlx, x * 32, y * 32, "so_long");
 		mlx_hook(data.win, 2, 1, key_handler, &data);
-		mlx_hook(data.win, 17, 1L << 17, mouse_hook, NULL);
+		mlx_hook(data.win, 17, 1L << 17, mouse_hook, &data);
 		render_map(&data);
 		mlx_loop(data.mlx);
 	}
