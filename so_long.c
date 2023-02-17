@@ -103,31 +103,39 @@ int	check_end(t_data *data, int x)
 	return (0);
 }
 
+void	colocar_movimento(int i)
+{
+	write(1,"movimentos: ",12);
+	ft_putnbr_fd(i,1);
+	write(1,"\n",1);
+}
+
 int	check_key(t_data *data, int x)
 {
+	static int	i;
+	int k;
+
+	k = 0;
 	if (check_end(data, x) == 1)
+	{
+		colocar_movimento(++i);
 		encerrar_jogo(data);
-	else if (x == A)
-	{
-		if (data->map.map[data->map.y][data->map.x - 1] == '1')
-			return (1);
 	}
-	else if (x == D)
-	{
-		if (data->map.map[data->map.y][data->map.x + 1] == '1')
-			return (1);
-	}
-	else if (x == W)
-	{
-		if (data->map.map[data->map.y - 1][data->map.x] == '1')
-			return (1);
-	}
-	else if (x == S)
-	{
-		if (data->map.map[data->map.y + 1][data->map.x] == '1')
-			return (1);
-	}
-	return (0);
+	else if (x == A
+		&& data->map.map[data->map.y][data->map.x - 1] == '1')
+			k = 1;
+	else if (x == D
+		&& data->map.map[data->map.y][data->map.x + 1] == '1')
+			k = 1;
+	else if (x == W
+		&& data->map.map[data->map.y - 1][data->map.x] == '1')
+			k = 1;
+	else if (x == S
+		&& data->map.map[data->map.y + 1][data->map.x] == '1')
+			k = 1;
+	if(k == 0)
+		colocar_movimento(++i);
+	return (k);
 }
 
 int	prox_numero(int keycode, t_data *data)
@@ -148,7 +156,7 @@ int	prox_numero(int keycode, t_data *data)
 
 int	key_handler(int keycode, t_data *data)
 {
-	int	op;
+	int		op;
 
 	op = 0;
 	op = prox_numero(keycode, data);
