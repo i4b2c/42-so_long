@@ -12,194 +12,182 @@
 
 #include "so_long.h"
 
-
-char ler_o_xpm(int fd);
-void render_map(t_data *data);
-
-void mudar_letra(t_data *data,int y,int x,int op,int keycode)
+void	mudar_letra(t_data *data, int y, int x, int op)
 {
-	(void)keycode;
-
-	data->map.map[data->map.y+y][data->map.x+x] = 'P';
-	if(op == 67)
+	data->map.map[data->map.y + y][data->map.x + x] = 'P';
+	if (op == 67)
 		data->map.collect--;
-	if(op == 69)
+	if (op == 69)
 	{
-		data->map.exit_x = data->map.x+x;
-		data->map.exit_y = data->map.y+y;
+		data->map.exit_x = data->map.x + x;
+		data->map.exit_y = data->map.y + y;
 	}
-	if(data->map.exit_x-x == data->map.x-x 
-			&& data->map.exit_y-y == data->map.y-y)
-	{
+	if (data->map.exit_x - x == data->map.x - x
+		&& data->map.exit_y - y == data->map.y - y)
 		data->map.map[data->map.y][data->map.x] = 'E';
-	}
-
 	else
 		data->map.map[data->map.y][data->map.x] = '0';
 }
 
-void get_imagens(t_data *data)
+void	get_imagens(t_data *data)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
-	data->map.cogumelo = mlx_xpm_file_to_image(data->mlx, COGUMELO , &x,&y);
-	data->map.brick = mlx_xpm_file_to_image(data->mlx, BRICK , &x,&y);
-	data->map.player = mlx_xpm_file_to_image(data->mlx, PLAYER , &x,&y);
-	data->map.door = mlx_xpm_file_to_image(data->mlx, DOOR , &x,&y);
-	data->map.grass = mlx_xpm_file_to_image(data->mlx, GRASS , &x,&y);
+	data->map.cogumelo = mlx_xpm_file_to_image(data->mlx, COGUMELO, &x, &y);
+	data->map.brick = mlx_xpm_file_to_image(data->mlx, BRICK, &x, &y);
+	data->map.player = mlx_xpm_file_to_image(data->mlx, PLAYER, &x, &y);
+	data->map.door = mlx_xpm_file_to_image(data->mlx, DOOR, &x, &y);
+	data->map.grass = mlx_xpm_file_to_image(data->mlx, GRASS, &x, &y);
 }
 
-int funcao_x(int fd)
+int	funcao_x(int fd)
 {
-	char *s;
-	int x;
-	int temp;
+	char	*s;
+	int		x;
+	int		temp;
+
 	s = get_next_line(fd);
-	x = ft_strlen(s)-1;
+	x = ft_strlen(s) - 1;
 	temp = x;
 	free(s);
-	while((s = get_next_line(fd)))
+	while ((s = get_next_line(fd)))
 	{
-		x = ft_strlen(s)-1;
+		x = ft_strlen(s) - 1;
 		free(s);
-		if(temp != x)
+		if (temp != x)
 			return (-1);
 	}
-	return x;
+	return (x);
 }
 
-int funcao_y(int fd)
+int	funcao_y(int fd)
 {
-	char *s;
-	int y;
+	char	*s;
+	int		y;
+
 	y = 0;
-	while((s = get_next_line(fd)))
+	while ((s = get_next_line(fd)))
 	{
 		y++;
 		free(s);
 	}
-	return y;
+	return (y);
 }
 
-
-
-
-int check_end(t_data *data, int x)
+int	check_end(t_data *data, int x)
 {
 	data->map.exit_suc = 0;
-	if(x == A && data->map.collect == 0)
+	if (x == A && data->map.collect == 0)
 	{
-		if(data->map.map[data->map.y][data->map.x-1] == 'E')
-			return 1;
+		if (data->map.map[data->map.y][data->map.x - 1] == 'E')
+			return (1);
 	}
-	else if(x == D && data->map.collect == 0)
+	else if (x == D && data->map.collect == 0)
 	{
-		if(data->map.map[data->map.y][data->map.x+1] == 'E')
-			return 1;
+		if (data->map.map[data->map.y][data->map.x + 1] == 'E')
+			return (1);
 	}
-	else if(x == W && data->map.collect == 0)
+	else if (x == W && data->map.collect == 0)
 	{
-		if(data->map.map[data->map.y-1][data->map.x] == 'E')
-			return 1;
+		if (data->map.map[data->map.y - 1][data->map.x] == 'E')
+			return (1);
 	}
-	else if(x == S && data->map.collect == 0)
+	else if (x == S && data->map.collect == 0)
 	{
-		if(data->map.map[data->map.y+1][data->map.x] == 'E')
-			return 1;
+		if (data->map.map[data->map.y + 1][data->map.x] == 'E')
+			return (1);
 	}
 	else
 		data->map.exit_suc = 0;
 	return (0);
 }
-int check_key(t_data *data, int x)
+
+int	check_key(t_data *data, int x)
 {
-	if(check_end(data,x) == 1)
+	if (check_end(data, x) == 1)
+		encerrar_jogo(data);
+	else if (x == A)
 	{
-		exit(0);
-		return (0);
+		if (data->map.map[data->map.y][data->map.x - 1] == '1')
+			return (1);
 	}
-	if(x == A)
+	else if (x == D)
 	{
-		if(data->map.map[data->map.y][data->map.x-1] == '1')
-			return 1;
+		if (data->map.map[data->map.y][data->map.x + 1] == '1')
+			return (1);
 	}
-	else if(x == D)
+	else if (x == W)
 	{
-		if(data->map.map[data->map.y][data->map.x+1] == '1')
-			return 1;
+		if (data->map.map[data->map.y - 1][data->map.x] == '1')
+			return (1);
 	}
-	else if(x == W)
+	else if (x == S)
 	{
-		if(data->map.map[data->map.y-1][data->map.x] == '1')
-			return 1;
+		if (data->map.map[data->map.y + 1][data->map.x] == '1')
+			return (1);
 	}
-	else if(x == S)
-	{
-		if(data->map.map[data->map.y+1][data->map.x] == '1')
-			return 1;
-	}
-	return 0;
+	return (0);
 }
 
-int prox_numero(int keycode, t_data *data)
+int	prox_numero(int keycode, t_data *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	if(keycode == A)
-		i = data->map.map[data->map.y][data->map.x-1];
-	if(keycode == D)
-		i = data->map.map[data->map.y][data->map.x+1];
-	if(keycode == S)
-		i = data->map.map[data->map.y+1][data->map.x];
-	if(keycode == W)
-		i = data->map.map[data->map.y-1][data->map.x];
-	return i;
+	if (keycode == A)
+		i = data->map.map[data->map.y][data->map.x - 1];
+	if (keycode == D)
+		i = data->map.map[data->map.y][data->map.x + 1];
+	if (keycode == S)
+		i = data->map.map[data->map.y + 1][data->map.x];
+	if (keycode == W)
+		i = data->map.map[data->map.y - 1][data->map.x];
+	return (i);
 }
 
-int key_handler(int keycode, t_data *data)
+int	key_handler(int keycode, t_data *data)
 {
-	int op;
+	int	op;
 
 	op = 0;
 	op = prox_numero(keycode, data);
-	/*0 = 48 , 1 = 49 , C = 67 , E = 69 */
-	if(keycode == A && check_key(data,A) != 1)
-		mudar_letra(data,0,-1,op,keycode);
-	else if(keycode == D && check_key(data,D) != 1)
-		mudar_letra(data,0,1,op,keycode);
-	else if(keycode == S && check_key(data,S) != 1)
-		mudar_letra(data,1,0,op,keycode);
-	else if(keycode == W && check_key(data,W) != 1)
-		mudar_letra(data,-1,0,op,keycode);
-	else if(keycode == ESC)
+	if (keycode == A && check_key(data, A) != 1)
+		mudar_letra(data, 0, -1, op);
+	else if (keycode == D && check_key(data, D) != 1)
+		mudar_letra(data, 0, 1, op);
+	else if (keycode == S && check_key(data, S) != 1)
+		mudar_letra(data, 1, 0, op);
+	else if (keycode == W && check_key(data, W) != 1)
+		mudar_letra(data, -1, 0, op);
+	else if (keycode == ESC)
 	{
-		mlx_destroy_window(data->mlx,data->win);
+		mlx_destroy_window(data->mlx, data->win);
 		exit(0);
 	}
 	render_map(data);
-	return 0;
+	return (0);
 }
 
-int mouse_hook(void)
+int	mouse_hook(void)
 {
 	exit(0);
-	return 0;
+	return (0);
 }
 
-char ler_o_xpm(int fd)
+char	ler_o_xpm(int fd)
 {
-	char *buf;
-	char s;
-	int x;
-	static int i;
+	char		*buf;
+	char		s;
+	int			x;
+	static int	i;
+
 	x = 0;
 	buf = malloc(1);
-	while(x <= i)
+	while (x <= i)
 	{
-		if(x == i)
-			read(fd,buf,1);
+		if (x == i)
+			read(fd, buf, 1);
 		x++;
 	}
 	s = buf[0];
@@ -208,73 +196,78 @@ char ler_o_xpm(int fd)
 	return (s);
 }
 
-void get_map(t_data *data,int fd)
+void	get_map(t_data *data, int fd)
 {
-	char *s;
-	int k;
+	char	*s;
+	int		k;
+
+	data->map.map = malloc((data->map.lin) * sizeof (char *));
 	k = 0;
-	data->map.map = malloc((data->map.lin)*sizeof(char *));
-	while((s = get_next_line(fd)))
+	while ((s = get_next_line(fd)))
 	{
-		data->map.map[k] = ft_strtrim(s,"\n");
+		data->map.map[k] = ft_strtrim(s, "\n");
 		data->map.map[k][data->map.col] = 0;
-		k++;
 		free(s);
+		k++;
 	}
 }
 
-int options_map(t_data *data, int k, int i)
+int	options_map(t_data *data, int k, int i)
 {
-	if(data->map.map[k][i] == '0')
-		return(0);
-	else if(data->map.map[k][i] == '1')
-		return(1);
-	else if(data->map.map[k][i] == 'E')
-		return(2);
-	else if(data->map.map[k][i] == 'P')
-		return(3);
-	else if(data->map.map[k][i] == 'C')
-		return(4);
-	return -1;
+	if (data->map.map[k][i] == '0')
+		return (0);
+	else if (data->map.map[k][i] == '1')
+		return (1);
+	else if (data->map.map[k][i] == 'E')
+		return (2);
+	else if (data->map.map[k][i] == 'P')
+		return (3);
+	else if (data->map.map[k][i] == 'C')
+		return (4);
+	return (-1);
 }
 
-void put_imagem(t_data *data, int op,int len_x, int len_y)
+void	put_imagem(t_data *data, int op, int len_x, int len_y)
 {
-
-	if(op == 0)
-		mlx_put_image_to_window(data->mlx,data->win,data->map.grass,32*len_x,32*len_y);
-	if(op == 1)
-		mlx_put_image_to_window(data->mlx,data->win,data->map.brick,32*len_x,32*len_y);
-	if(op == 2)
-		mlx_put_image_to_window(data->mlx,data->win,data->map.door,32*len_x,32*len_y);
-	if(op == 3)
+	if (op == 0)
+		mlx_put_image_to_window(data->mlx,
+			data->win, data->map.grass, 32 * len_x, 32 * len_y);
+	if (op == 1)
+		mlx_put_image_to_window(data->mlx,
+			data->win, data->map.brick, 32 * len_x, 32 * len_y);
+	if (op == 2)
+		mlx_put_image_to_window(data->mlx,
+			data->win, data->map.door, 32 * len_x, 32 * len_y);
+	if (op == 3)
 	{
 		data->map.x = len_x;
 		data->map.y = len_y;
-		mlx_put_image_to_window(data->mlx,data->win,data->map.player,32*len_x,32*len_y);
+		mlx_put_image_to_window(data->mlx,
+			data->win, data->map.player, 32 * len_x, 32 * len_y);
 	}
-	if(op == 4)
-		mlx_put_image_to_window(data->mlx,data->win,data->map.cogumelo,32*len_x,32*len_y);
+	if (op == 4)
+		mlx_put_image_to_window(data->mlx,
+			data->win, data->map.cogumelo, 32 * len_x, 32 * len_y);
 }
 
-void ver_objetos(t_data *data)
+void	ver_objetos(t_data *data)
 {
-	int i;
-	int k;
-	int op;
+	int	i;
+	int	k;
+	int	op;
 
 	k = 0;
-	while(k < data->map.lin)
+	while (k < data->map.lin)
 	{
 		i = 0;
-		while(data->map.map[k][i] != '\0')
+		while (data->map.map[k][i] != '\0')
 		{
-			op = options_map(data,k,i);
-			if(op == 2)
+			op = options_map(data, k, i);
+			if (op == 2)
 				data->map.exit++;
-			else if(op == 3)
-				data->map.player_counter++;	
-			else if(op == 4)
+			else if (op == 3)
+				data->map.player_counter++;
+			else if (op == 4)
 				data->map.collect++;
 			i++;
 		}
@@ -282,59 +275,61 @@ void ver_objetos(t_data *data)
 	}
 }
 
-void render_map(t_data *data)
+void	render_map(t_data *data)
 {
-	int i;
-	int k;
-	int op;
+	int	i;
+	int	k;
+	int	op;
+
 	k = 0;
-	while(k < data->map.lin)
+	while (k < data->map.lin)
 	{
 		i = 0;
-		while(data->map.map[k][i] != '\0')
+		while (data->map.map[k][i] != '\0')
 		{
-			op = options_map(data,k,i);
-			if(op == -1)
+			op = options_map(data, k, i);
+			if (op == -1)
 			{
-				mlx_destroy_window(data->mlx,data->win);
+				mlx_destroy_window(data->mlx, data->win);
 				printf("Error\n");
 				exit(0);
 			}
-			put_imagem(data,op,i,k);
+			put_imagem(data, op, i, k);
 			i++;
 		}
 		k++;
 	}
 }
 
-char    *ft_strcpy(char *s1, char *s2)
-  {
-      int i;
- 
-      i = 0;
-      while (s2[i])
-      {
-          s1[i] = s2[i];
-	  i++;
-      }
-      s1[i] = s2[i];
-      return (s1);
-  }
-int verificar_ber(char *str)
+char	*ft_strcpy(char *s1, char *s2)
 {
-	int i;
-	int k;
-	char *frase;
+	int	i;
+
+	i = 0;
+	while (s2[i])
+	{
+		s1[i] = s2[i];
+		i++;
+	}
+	s1[i] = s2[i];
+	return (s1);
+}
+
+int	verificar_ber(char *str)
+{
+	int		i;
+	int		k;
+	char	*frase;
 
 	i = 0;
 	frase = malloc(5 * sizeof(char));
-	ft_strcpy(frase,".ber");
-	while(str[i] != '\0')
+	ft_strcpy(frase, ".ber");
+	while (str[i] != '\0')
 	{
 		k = 0;
-		while(str[i+k] == frase[k])
+		while (str[i + k] == frase[k])
 		{
-			if(frase[k+1] == '\0')
+			if (frase[k + 1] == '\0')
 			{
 				free(frase);
 				return (0);
@@ -344,62 +339,111 @@ int verificar_ber(char *str)
 		i++;
 	}
 	free(frase);
-	return(1);
+	return (1);
 }
 
-int ver_erro(int x, int y, char *str,t_data *data)
+int	ver_erro(int x, int y, char *str, t_data *data)
 {
-	int erro;
+	int	erro;
 
 	erro = 0;
-	if(data->map.collect == 0 || data->map.exit != 1 || data->map.player_counter != 1)
+	if (data->map.collect == 0 || data->map.exit != 1
+		|| data->map.player_counter != 1)
 		erro = 1;
-	if(x == -1 || x == y)
+	if (x == -1 || x == y)
 		erro = 1;
-	if((verificar_ber(str)) != 0)
+	if ((verificar_ber(str)) != 0)
 		erro = 1;
-	return(erro);
+	return (erro);
 }
 
-void atribuir_col_e_lin(t_data *data,int x,int y)
+void	atribuir_col_e_lin(t_data *data, int x, int y)
 {
 	data->map.col = x;
 	data->map.lin = y;
 }
 
-int main(int ac, char **av)
+void	free_total(t_data *data)
 {
-	int fd_x;
-	int fd_y;
-	int y,x;
-	t_data data;
-	int fd;
-	if(ac == 2)
+	int	i;
+
+	i = data->map.lin - 1;
+	while (i >= 0)
+	{
+		free(data->map.map[i]);
+		i--;
+	}
+	free(data->map.map);
+	mlx_loop_end(data->mlx);
+	mlx_destroy_window(data->mlx, data->win);
+	mlx_destroy_image(data->mlx, data->map.grass);
+	mlx_destroy_image(data->mlx, data->map.door);
+	mlx_destroy_image(data->mlx, data->map.brick);
+	mlx_destroy_image(data->mlx, data->map.player);
+	mlx_destroy_image(data->mlx, data->map.cogumelo);
+	mlx_destroy_display(data->mlx);
+	free(data->mlx);
+}
+
+void	encerrar_jogo(t_data *data)
+{
+	free_total(data);
+	exit(0);
+}
+
+void	encerrar_jogo_erro(t_data *data)
+{
+	free_total(data);
+	ft_printf("Error\n");
+	exit(0);
+}
+
+int	get_x_y(int *x, int *y, char **av)
+{
+	int	fd;
+
+	fd = open(av[1], O_RDONLY);
+	*y = funcao_y(fd);
+	fd = open(av[1], O_RDONLY);
+	*x = funcao_x(fd);
+	fd = open(av[1], O_RDONLY);
+	return (fd);
+}
+
+void	iniciar(t_data *data)
+{
+	data->map.collect = 0;
+	data->map.exit = 0;
+	data->map.player_counter = 0;
+	data->map.collect = 0;
+	data->map.exit_x = 0;
+	data->map.exit_y = 0;
+}
+
+int	main(int ac,	char **av)
+{
+	int		y;
+	int		x;
+	int		fd;
+	t_data	data;
+
+	iniciar(&data);
+	if (ac == 2)
 	{
 		data.mlx = mlx_init();
-		fd_x = open(av[1],O_RDONLY);
-		fd_y = open(av[1],O_RDONLY);
-		y = funcao_y(fd_x);
-		x = funcao_x(fd_y);
-		close(fd_x);
-		close(fd_y);
-		atribuir_col_e_lin(&data,x,y);
-		fd = open(av[1],O_RDONLY);
-		get_map(&data,fd);
+		fd = get_x_y(&x, &y, av);
+		atribuir_col_e_lin(&data, x, y);
+		get_map(&data, fd);
 		ver_objetos(&data);
 		get_imagens(&data);
 		close(fd);
-		if(ver_erro(x,y,av[1],&data) == 1)
-		{
-			ft_printf("Error\n");
-			exit(0);
-			return (0);
-		}
-		data.win = mlx_new_window(data.mlx,x*32,y*32,"so_long");
-		mlx_hook(data.win,2,1,key_handler,&data);
-		mlx_hook(data.win,17, 1L << 17,mouse_hook,NULL);
+		if (ver_erro(x, y, av[1], &data) == 1)
+			encerrar_jogo_erro(&data);
+		data.win = mlx_new_window(data.mlx, x * 32, y * 32, "so_long");
+		mlx_hook(data.win, 2, 1, key_handler, &data);
+		mlx_hook(data.win, 17, 1L << 17, mouse_hook, NULL);
 		render_map(&data);
 		mlx_loop(data.mlx);
 	}
-	return 0;
+	return (0);
 }
