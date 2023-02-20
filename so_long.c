@@ -105,15 +105,15 @@ int	check_end(t_data *data, int x)
 
 void	colocar_movimento(int i)
 {
-	write(1,"movimentos: ",12);
-	ft_putnbr_fd(i,1);
-	write(1,"\n",1);
+	write(1, "movimentos: ", 12);
+	ft_putnbr_fd(i, 1);
+	write(1, "\n", 1);
 }
 
 int	check_key(t_data *data, int x)
 {
 	static int	i;
-	int k;
+	int			k;
 
 	k = 0;
 	if (check_end(data, x) == 1)
@@ -133,7 +133,7 @@ int	check_key(t_data *data, int x)
 	else if (x == S
 		&& data->map.map[data->map.y + 1][data->map.x] == '1')
 			k = 1;
-	if(k == 0)
+	if (k == 0)
 		colocar_movimento(++i);
 	return (k);
 }
@@ -234,25 +234,25 @@ int	options_map(t_data *data, int k, int i)
 
 void	put_imagem(t_data *data, int op, int len_x, int len_y)
 {
-	if (op == 0)
-		mlx_put_image_to_window(data->mlx,
-			data->win, data->map.grass, 32 * len_x, 32 * len_y);
 	if (op == 1)
 		mlx_put_image_to_window(data->mlx,
 			data->win, data->map.brick, 32 * len_x, 32 * len_y);
-	if (op == 2)
+	else if (op == 2)
 		mlx_put_image_to_window(data->mlx,
 			data->win, data->map.door, 32 * len_x, 32 * len_y);
-	if (op == 3)
+	else if (op == 3)
 	{
 		data->map.x = len_x;
 		data->map.y = len_y;
 		mlx_put_image_to_window(data->mlx,
 			data->win, data->map.player, 32 * len_x, 32 * len_y);
 	}
-	if (op == 4)
+	else if (op == 4)
 		mlx_put_image_to_window(data->mlx,
 			data->win, data->map.cogumelo, 32 * len_x, 32 * len_y);
+	else
+		mlx_put_image_to_window(data->mlx,
+			data->win, data->map.grass, 32 * len_x, 32 * len_y);
 }
 
 void	ver_objetos(t_data *data)
@@ -438,12 +438,12 @@ int	main(int ac,	char **av)
 		ver_objetos(&data);
 		get_imagens(&data);
 		close(fd);
-		if (ver_erro(x, y, av[1], &data) == 1)
-			encerrar_jogo_erro(&data);
 		data.win = mlx_new_window(data.mlx, x * 32, y * 32, "so_long");
 		mlx_hook(data.win, 2, 1, key_handler, &data);
 		mlx_hook(data.win, 17, 1L << 17, mouse_hook, &data);
 		render_map(&data);
+		if (ver_erro(x, y, av[1], &data) == 1)
+			encerrar_jogo_erro(&data);
 		mlx_loop(data.mlx);
 	}
 	return (0);
