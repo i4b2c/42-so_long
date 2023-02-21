@@ -103,11 +103,13 @@ int	check_end(t_data *data, int x)
 	return (0);
 }
 
-void	colocar_movimento(int i)
+void	colocar_movimento(int i,t_data *data)
 {
-	write(1, "movimentos: ", 12);
-	ft_putnbr_fd(i, 1);
-	write(1, "\n", 1);
+	char	*str;
+
+	str = ft_itoa(i);
+	mlx_string_put(data->mlx, data->win, 10 , 20 , WHITE , "movimentos:");
+	mlx_string_put(data->mlx, data->win, 90 , 20 , WHITE , str);
 }
 
 int	check_key(t_data *data, int x)
@@ -118,7 +120,7 @@ int	check_key(t_data *data, int x)
 	k = 0;
 	if (check_end(data, x) == 1)
 	{
-		colocar_movimento(++i);
+		colocar_movimento(++i,data);
 		encerrar_jogo(data);
 	}
 	else if (x == A
@@ -134,7 +136,7 @@ int	check_key(t_data *data, int x)
 		&& data->map.map[data->map.y + 1][data->map.x] == '1')
 			k = 1;
 	if (k == 0)
-		colocar_movimento(++i);
+		colocar_movimento(++data->map.mov,data);
 	return (k);
 }
 
@@ -249,10 +251,11 @@ void	put_imagem(t_data *data, int op, int len_x, int len_y)
 	}
 	else if (op == 4)
 		mlx_put_image_to_window(data->mlx,
-			data->win, data->map.cogumelo, 32 * len_x, 32 * len_y);
+			data->win, data->map.cogumelo, 32 * len_x,32 * len_y);
 	else
 		mlx_put_image_to_window(data->mlx,
 			data->win, data->map.grass, 32 * len_x, 32 * len_y);
+
 }
 
 void	ver_objetos(t_data *data)
@@ -300,6 +303,7 @@ void	render_map(t_data *data)
 		}
 		k++;
 	}
+	colocar_movimento(data->map.mov,data);
 }
 
 char	*ft_strcpy(char *s1, char *s2)
@@ -458,6 +462,7 @@ void	iniciar(t_data *data)
 	data->map.collect = 0;
 	data->map.exit_x = 0;
 	data->map.exit_y = 0;
+	data->map.mov = 0;
 }
 
 int	main(int ac,	char **av)

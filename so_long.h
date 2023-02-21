@@ -31,6 +31,7 @@ typedef struct s_map
 	int		exit_suc;
 	int		exit_x;
 	int		exit_y;
+	int		mov;
 	void	*cogumelo;
 	void	*brick;
 	void	*player;
