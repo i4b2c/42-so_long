@@ -342,18 +342,48 @@ int	verificar_ber(char *str)
 	free(frase);
 	return (1);
 }
+/*
+int verificar_fim_ini(char *str,int x)
+{
+	int i;
+	
+	i = 0;
+	while(str[i] != '\0')
+	{
+		if(str[i] != '1' && (i == 0 || i == x))
+			return(1);
+		i++;
+	}
+	return (0);
+}
 
-int	ver_erro(int x, int y, char *str, t_data *data)
+int verificar_x_y(t_data data)
+{
+	int i;
+
+	i = 0;
+	while(data.map.map[i])
+	{
+		if((verificar_fim_ini(data.map.map[1],data.map.col-1) == 1))
+				return (1);
+		i++;
+	}
+	return (0);
+}*///tentar arrumar :C
+
+int	ver_erro(int x, int y, char *str, t_data data)
 {
 	int	erro;
 
 	erro = 0;
-	if (data->map.collect == 0 || data->map.exit != 1
-		|| data->map.player_counter != 1)
+	if (data.map.collect == 0 || data.map.exit != 1
+		|| data.map.player_counter != 1)
 		erro = 1;
 	if (x == -1 || x == y)
 		erro = 1;
 	if ((verificar_ber(str)) != 0)
+		erro = 1;
+	if((verificar_x_y(data) != 0))
 		erro = 1;
 	return (erro);
 }
@@ -442,7 +472,7 @@ int	main(int ac,	char **av)
 		mlx_hook(data.win, 2, 1, key_handler, &data);
 		mlx_hook(data.win, 17, 1L << 17, mouse_hook, &data);
 		render_map(&data);
-		if (ver_erro(x, y, av[1], &data) == 1)
+		if (ver_erro(x, y, av[1], data) == 1)
 			encerrar_jogo_erro(&data);
 		mlx_loop(data.mlx);
 	}
