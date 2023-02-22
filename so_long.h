@@ -7,6 +7,7 @@
 # define BRICK "./textures/black_brick.xpm"
 # define GRASS "./textures/wood.xpm"
 # define PLAYER "./textures/fantasma.xpm"
+# define PLAYER_R "./textures/fantasma_r.xpm"
 # define DOOR "./textures/door.xpm"
 # define COGUMELO "./textures/porcao.xpm"
 # define DOOR_OPEN "./textures/door_open.xpm"
@@ -33,11 +34,13 @@ typedef struct s_map
 	int		exit_x;
 	int		exit_y;
 	int		mov;
+	int		keycode;
 	void	*cogumelo;
 	void	*brick;
 	void	*player;
 	void	*door;
 	void	*door_open;
+	void	*player_r;
 	void	*grass;
 }	t_map;
 

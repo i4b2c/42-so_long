@@ -163,6 +163,7 @@ int	key_handler(int keycode, t_data *data)
 
 	op = 0;
 	op = prox_numero(keycode, data);
+	data->map.keycode = keycode;
 	if (keycode == A && check_key(data, A) != 1)
 		mudar_letra(data, 0, -1, op);
 	else if (keycode == D && check_key(data, D) != 1)
@@ -235,6 +236,23 @@ int	options_map(t_data *data, int k, int i)
 	return (-1);
 }
 
+void colocar_fantasma_direcao(t_data *data, int x, int y)
+{
+	int x_1;
+	int y_2;
+	if(data->map.keycode == A)
+	{
+		mlx_destroy_image(data->mlx, data->map.player);
+		data->map.player = mlx_xpm_file_to_image(data->mlx, PLAYER, &x_1, &y_2);
+	}
+	else if(data->map.keycode == D)
+	{
+		mlx_destroy_image(data->mlx, data->map.player);
+		data->map.player = mlx_xpm_file_to_image(data->mlx, PLAYER_R, &x_1, &y_2);
+	}
+	mlx_put_image_to_window(data->mlx,data->win, data->map.player, 64 * x, 64 * y);
+}
+
 void	put_imagem(t_data *data, int op, int len_x, int len_y)
 {
 	if (op == 1)
@@ -253,8 +271,8 @@ void	put_imagem(t_data *data, int op, int len_x, int len_y)
 	{
 		data->map.x = len_x;
 		data->map.y = len_y;
-		mlx_put_image_to_window(data->mlx,
-			data->win, data->map.player, 64 * len_x, 64 * len_y);
+		colocar_fantasma_direcao(data,len_x,len_y);
+
 	}
 	else if (op == 4)
 		mlx_put_image_to_window(data->mlx,
@@ -262,7 +280,6 @@ void	put_imagem(t_data *data, int op, int len_x, int len_y)
 	else
 		mlx_put_image_to_window(data->mlx,
 			data->win, data->map.grass, 64 * len_x, 64 * len_y);
-
 }
 
 void	ver_objetos(t_data *data)
@@ -470,6 +487,7 @@ void	iniciar(t_data *data)
 	data->map.exit_x = 0;
 	data->map.exit_y = 0;
 	data->map.mov = 0;
+	data->map.keycode = 0;
 }
 
 int	main(int ac,	char **av)
