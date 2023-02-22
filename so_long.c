@@ -79,22 +79,22 @@ int	funcao_y(int fd)
 int	check_end(t_data *data, int x)
 {
 	data->map.exit_suc = 0;
-	if (x == A && data->map.collect == 0)
+	if (x == A && data->map.collect == -1)
 	{
 		if (data->map.map[data->map.y][data->map.x - 1] == 'E')
 			return (1);
 	}
-	else if (x == D && data->map.collect == 0)
+	else if (x == D && data->map.collect == -1)
 	{
 		if (data->map.map[data->map.y][data->map.x + 1] == 'E')
 			return (1);
 	}
-	else if (x == W && data->map.collect == 0)
+	else if (x == W && data->map.collect == -1)
 	{
 		if (data->map.map[data->map.y - 1][data->map.x] == 'E')
 			return (1);
 	}
-	else if (x == S && data->map.collect == 0)
+	else if (x == S && data->map.collect == -1)
 	{
 		if (data->map.map[data->map.y + 1][data->map.x] == 'E')
 			return (1);
@@ -111,6 +111,7 @@ void	colocar_movimento(int i,t_data *data)
 	str = ft_itoa(i);
 	mlx_string_put(data->mlx, data->win, 10 , 20 , WHITE , "movimentos:");
 	mlx_string_put(data->mlx, data->win, 90 , 20 , WHITE , str);
+	free(str);
 }
 
 int	check_key(t_data *data, int x)
@@ -253,6 +254,37 @@ void colocar_fantasma_direcao(t_data *data, int x, int y)
 	mlx_put_image_to_window(data->mlx,data->win, data->map.player, 64 * x, 64 * y);
 }
 
+void sprite_porta(t_data *data, int x,int y)
+{
+	int x1;
+	int x2;
+	if(data->map.collect == -1)
+	{
+		mlx_put_image_to_window(data->mlx,data->win, data->map.door, 64 * x, 64 * y);
+		return ;
+	}
+	mlx_destroy_image(data->mlx, data->map.door);
+	data->map.door = mlx_xpm_file_to_image(data->mlx, "./textures/door2.xpm",&x1,&x2);
+	mlx_put_image_to_window(data->mlx,data->win, data->map.door, 64 * x, 64 * y);
+	usleep(100000);
+	mlx_destroy_image(data->mlx, data->map.door);
+	data->map.door = mlx_xpm_file_to_image(data->mlx, "./textures/door3.xpm",&x1,&x2);
+	mlx_put_image_to_window(data->mlx,data->win, data->map.door, 64 * x, 64 * y);
+	usleep(100000);
+	mlx_destroy_image(data->mlx, data->map.door);
+	data->map.door = mlx_xpm_file_to_image(data->mlx, "./textures/door4.xpm",&x1,&x2);
+	mlx_put_image_to_window(data->mlx,data->win, data->map.door, 64 * x, 64 * y);
+	usleep(100000);
+	mlx_destroy_image(data->mlx, data->map.door);
+	data->map.door = mlx_xpm_file_to_image(data->mlx, "./textures/door5.xpm",&x1,&x2);
+	mlx_put_image_to_window(data->mlx,data->win, data->map.door, 64 * x, 64 * y);
+	usleep(100000);
+	mlx_destroy_image(data->mlx, data->map.door);
+	data->map.door = mlx_xpm_file_to_image(data->mlx, DOOR_OPEN,&x1,&x2);
+	mlx_put_image_to_window(data->mlx,data->win, data->map.door, 64 * x, 64 * y);
+	data->map.collect = -1;
+}
+
 void	put_imagem(t_data *data, int op, int len_x, int len_y)
 {
 	if (op == 1)
@@ -260,12 +292,13 @@ void	put_imagem(t_data *data, int op, int len_x, int len_y)
 			data->win, data->map.brick, 64 * len_x, 64 * len_y);
 	else if (op == 2)
 	{
-		if(data->map.collect != 0)
-		mlx_put_image_to_window(data->mlx,
-			data->win, data->map.door, 64 * len_x, 64 * len_y);
-		else
-		mlx_put_image_to_window(data->mlx,
-			data->win, data->map.door_open, 64 * len_x, 64 * len_y);
+		if(data->map.collect >= 0)
+		{
+			data->map.exit_x = len_x;
+			data->map.exit_y = len_y;
+			mlx_put_image_to_window(data->mlx,
+				data->win, data->map.door, 64 * len_x, 64 * len_y);
+		}
 	}
 	else if (op == 3)
 	{
@@ -327,6 +360,8 @@ void	render_map(t_data *data)
 		}
 		k++;
 	}
+	if(data->map.collect == 0)
+		sprite_porta(data,data->map.exit_x,data->map.exit_y);
 	colocar_movimento(data->map.mov,data);
 }
 
@@ -446,6 +481,7 @@ void	free_total(t_data *data)
 	mlx_destroy_window(data->mlx, data->win);
 	mlx_destroy_image(data->mlx, data->map.grass);
 	mlx_destroy_image(data->mlx, data->map.door);
+	mlx_destroy_image(data->mlx, data->map.door_open);
 	mlx_destroy_image(data->mlx, data->map.brick);
 	mlx_destroy_image(data->mlx, data->map.player);
 	mlx_destroy_image(data->mlx, data->map.cogumelo);
