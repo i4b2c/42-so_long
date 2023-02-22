@@ -511,6 +511,7 @@ void	free_total(t_data *data)
 	mlx_destroy_image(data->mlx, data->map.brick);
 	mlx_destroy_image(data->mlx, data->map.player);
 	mlx_destroy_image(data->mlx, data->map.cogumelo);
+	mlx_destroy_image(data->mlx, data->map.inimigo);
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
 }
