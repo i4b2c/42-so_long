@@ -11,6 +11,7 @@
 # define DOOR "./textures/door.xpm"
 # define COGUMELO "./textures/porcao.xpm"
 # define DOOR_OPEN "./textures/door_open.xpm"
+# define BOY "./textures/boy.xpm"
 # define WHITE 16777215
 # define ESC 65307
 # define A 97
@@ -42,6 +43,7 @@ typedef struct s_map
 	void	*door_open;
 	void	*player_r;
 	void	*grass;
+	void	*inimigo;
 }	t_map;
 
 typedef struct s_data

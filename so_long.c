@@ -40,6 +40,7 @@ void	get_imagens(t_data *data)
 	data->map.door = mlx_xpm_file_to_image(data->mlx, DOOR, &x, &y);
 	data->map.grass = mlx_xpm_file_to_image(data->mlx, GRASS, &x, &y);
 	data->map.door_open = mlx_xpm_file_to_image(data->mlx, DOOR_OPEN, &x, &y);
+	data->map.inimigo = mlx_xpm_file_to_image(data->mlx, BOY, &x, &y);
 }
 
 int	funcao_x(int fd)
@@ -76,31 +77,57 @@ int	funcao_y(int fd)
 	return (y);
 }
 
+int act_a(t_data *data)
+{
+	if(data->map.map[data->map.y][data->map.x - 1] == 'E'
+		&& data->map.collect == -1)
+		return (1);
+	else if(data->map.map[data->map.y][data->map.x - 1] == 'N')
+		return (1);
+	return 0;
+}
+
+int act_d(t_data *data)
+{
+	if(data->map.map[data->map.y][data->map.x + 1] == 'E'
+		&& data->map.collect == -1)
+		return (1);
+	else if(data->map.map[data->map.y][data->map.x + 1] == 'N')
+		return (1);
+	return (0);
+}
+
+int act_w(t_data *data)
+{
+	if (data->map.map[data->map.y - 1][data->map.x] == 'E'
+		&& data->map.collect == -1)
+		return (1);
+	else if (data->map.map[data->map.y - 1][data->map.x] == 'N')
+		return (1);
+	return (0);
+}
+
+int act_s(t_data *data)
+{
+	if (data->map.map[data->map.y + 1][data->map.x] == 'E'
+		&& data->map.collect == -1)
+		return (1);
+	else if (data->map.map[data->map.y + 1][data->map.x] == 'N')
+		return (1);
+	return (0);
+}
+
 int	check_end(t_data *data, int x)
 {
 	data->map.exit_suc = 0;
-	if (x == A && data->map.collect == -1)
-	{
-		if (data->map.map[data->map.y][data->map.x - 1] == 'E')
-			return (1);
-	}
-	else if (x == D && data->map.collect == -1)
-	{
-		if (data->map.map[data->map.y][data->map.x + 1] == 'E')
-			return (1);
-	}
-	else if (x == W && data->map.collect == -1)
-	{
-		if (data->map.map[data->map.y - 1][data->map.x] == 'E')
-			return (1);
-	}
-	else if (x == S && data->map.collect == -1)
-	{
-		if (data->map.map[data->map.y + 1][data->map.x] == 'E')
-			return (1);
-	}
-	else
-		data->map.exit_suc = 0;
+	if (x == A)
+		return(act_a(data));
+	else if (x == D)
+		return(act_d(data));
+	else if (x == W)
+		return(act_w(data));
+	else if (x == S)
+		return(act_s(data));
 	return (0);
 }
 
@@ -234,6 +261,8 @@ int	options_map(t_data *data, int k, int i)
 		return (3);
 	else if (data->map.map[k][i] == 'C')
 		return (4);
+	else if (data->map.map[k][i] == 'N')
+		return (5);
 	return (-1);
 }
 
@@ -258,11 +287,9 @@ void sprite_porta(t_data *data, int x,int y)
 {
 	int x1;
 	int x2;
-	if(data->map.collect == -1)
-	{
-		mlx_put_image_to_window(data->mlx,data->win, data->map.door, 64 * x, 64 * y);
+
+	if (data->map.collect == -1)
 		return ;
-	}
 	mlx_destroy_image(data->mlx, data->map.door);
 	data->map.door = mlx_xpm_file_to_image(data->mlx, "./textures/door2.xpm",&x1,&x2);
 	mlx_put_image_to_window(data->mlx,data->win, data->map.door, 64 * x, 64 * y);
@@ -292,13 +319,10 @@ void	put_imagem(t_data *data, int op, int len_x, int len_y)
 			data->win, data->map.brick, 64 * len_x, 64 * len_y);
 	else if (op == 2)
 	{
-		if(data->map.collect >= 0)
-		{
-			data->map.exit_x = len_x;
-			data->map.exit_y = len_y;
-			mlx_put_image_to_window(data->mlx,
-				data->win, data->map.door, 64 * len_x, 64 * len_y);
-		}
+		data->map.exit_x = len_x;
+		data->map.exit_y = len_y;
+		mlx_put_image_to_window(data->mlx,
+			data->win, data->map.door, 64 * len_x, 64 * len_y);
 	}
 	else if (op == 3)
 	{
@@ -310,6 +334,8 @@ void	put_imagem(t_data *data, int op, int len_x, int len_y)
 	else if (op == 4)
 		mlx_put_image_to_window(data->mlx,
 			data->win, data->map.cogumelo, 64 * len_x, 64 * len_y);
+	else if (op == 5)
+		mlx_put_image_to_window(data->mlx,data->win, data->map.inimigo, 64 * len_x, 64 * len_y);
 	else
 		mlx_put_image_to_window(data->mlx,
 			data->win, data->map.grass, 64 * len_x, 64 * len_y);
@@ -526,30 +552,37 @@ void	iniciar(t_data *data)
 	data->map.keycode = 0;
 }
 
+void	iniciar_jogo(t_data *data, char **av)
+{
+	int fd;
+	int x;
+	int y;
+
+	iniciar(data);
+	data->mlx = mlx_init();
+	fd = get_x_y(&x, &y, av);
+	atribuir_col_e_lin(data, x, y);
+	get_map(data, fd);
+	ver_objetos(data);
+	get_imagens(data);
+	close(fd);
+	data->win = mlx_new_window(data->mlx, x * 64, y * 64, "so_long");
+	mlx_hook(data->win, 2, 1, key_handler, data);
+	mlx_hook(data->win, 17, 1, mouse_hook, data);
+	if (ver_erro(x, y, av[1], *data) == 1)
+		encerrar_jogo_erro(data);
+	render_map(data);
+	mlx_loop(data->mlx);
+	
+}
+
 int	main(int ac,	char **av)
 {
-	int		y;
-	int		x;
-	int		fd;
 	t_data	data;
 
-	iniciar(&data);
 	if (ac == 2)
 	{
-		data.mlx = mlx_init();
-		fd = get_x_y(&x, &y, av);
-		atribuir_col_e_lin(&data, x, y);
-		get_map(&data, fd);
-		ver_objetos(&data);
-		get_imagens(&data);
-		close(fd);
-		data.win = mlx_new_window(data.mlx, x * 64, y * 64, "so_long");
-		mlx_hook(data.win, 2, 1, key_handler, &data);
-		mlx_hook(data.win, 17, 1L << 17, mouse_hook, &data);
-		render_map(&data);
-		if (ver_erro(x, y, av[1], data) == 1)
-			encerrar_jogo_erro(&data);
-		mlx_loop(data.mlx);
+		iniciar_jogo(&data,av);
 	}
 	return (0);
 }
