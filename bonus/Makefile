@@ -91,7 +91,7 @@ fclean: clean
 		@$(RM) $(NAME)
 extra: fclean
 	@$(RM) $(EXTRA)
-	#$(RM_GIT)
+	$(RM_GIT)
 re: extra all
 
 ez: 
