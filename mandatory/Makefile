@@ -47,7 +47,19 @@ SRC = libft/src/ft_isalpha.c \
       libft/src/len.c \
       libft/src/ft_printf.c \
       get_next_line/get_next_line.c \
-      get_next_line/get_next_line_utils.c
+      get_next_line/get_next_line_utils.c \
+      src/check_end_key.c \
+      src/encerrar.c \
+      src/erro.c \
+      src/extra.c \
+      src/free.c \
+      src/get_x_y.c \
+      src/get.c \
+      src/hook.c \
+      src/iniciar.c \
+      src/key.c \
+      src/render.c \
+      src/main.c
 
 CC = cc
 RM = rm -rf
@@ -60,17 +72,19 @@ LIBFLAG = -lXext -lX11 -lm
 GIT = git clone git@github.com:42Paris/minilibx-linux.git minilibx
 RM_GIT = rm -rf minilibx
 OBJ = $(SRC:%.c=%.o)
+SRC_MAIN = src/main.c
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 		@$(AR) $(NAME) $(OBJ)
-		@$(GIT)
-		make -C minilibx
-		@$(CC) $(CFLAGS) so_long.c libft.a $(LIBSRC) $(LIBFLAG) -o so_long
+		@$(CC) $(CFLAGS) $(SRC_MAIN) $(NAME) $(LIBSRC) $(LIBFLAG) -o so_long
 
 clean:
 		@$(RM) $(OBJ)
+minilibx:
+	@$(GIT)
+	make -C minilibx
 
 fclean: clean
 		@$(RM) $(NAME)
@@ -79,8 +93,8 @@ extra: fclean
 	$(RM_GIT)
 re: extra all
 
-ez: 
-		@$(CC) $(CFLAGS) so_long.c libft.a $(LIBSRC) $(LIBFLAG) -o so_long
+ez:
+		@$(CC) $(CFLAGS) src/so_long.c libft.a $(LIBSRC) $(LIBFLAG) -o so_long
 git:
 	git add *
 	git commit -m .
