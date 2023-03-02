@@ -30,7 +30,6 @@ void	put_imagem(t_data *data, int op, int len_x, int len_y)
 		data->map.y = len_y;
 		mlx_put_image_to_window(data->mlx,
 			data->win, data->map.player, 64 * len_x, 64 * len_y);
-
 	}
 	else if (op == 4)
 		mlx_put_image_to_window(data->mlx,
@@ -94,8 +93,11 @@ void	get_map(t_data *data, int fd)
 
 	data->map.map = malloc((data->map.lin) * sizeof (char *));
 	k = 0;
-	while ((s = get_next_line(fd)))
+	while (1)
 	{
+		s = get_next_line(fd);
+		if (!s)
+			break ;
 		data->map.map[k] = ft_strtrim(s, "\n");
 		data->map.map[k][data->map.col] = 0;
 		free(s);

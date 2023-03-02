@@ -14,8 +14,8 @@
 
 int	erro_vazio(char *str)
 {
-	int		fd;
 	char	*s;
+	int		fd;
 	int		i;
 
 	i = 0;
@@ -58,41 +58,42 @@ int	verificar_ber(char *str)
 	return (1);
 }
 
-int verificar_x(t_data data)
+int	verificar_x(t_data data)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(i < data.map.lin)
+	while (i < data.map.lin)
 	{
-		if(data.map.map[i][0] != '1' || data.map.map[i][data.map.col-1] != '1')
-			return(1);
+		if (data.map.map[i][0] != '1'
+			|| data.map.map[i][data.map.col - 1] != '1')
+			return (1);
 		i++;
 	}
-	return 0;
+	return (0);
 }
 
-int verificar_y(t_data data)
+int	verificar_y(t_data data)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
-	while(i < data.map.lin)
+	while (i < data.map.lin)
 	{
-		if(i == 0 || i == data.map.lin-1)
+		if (i == 0 || i == data.map.lin - 1)
 		{
 			j = 0;
-			while(j < data.map.col)
+			while (j < data.map.col)
 			{
-				if(data.map.map[i][j] != '1')
-					return 1;
+				if (data.map.map[i][j] != '1')
+					return (1);
 				j++;
 			}
 		}
 		i++;
 	}
-	return 0;
+	return (0);
 }
 
 int	ver_erro(int x, int y, char *str, t_data data)
@@ -107,7 +108,7 @@ int	ver_erro(int x, int y, char *str, t_data data)
 		erro = 1;
 	if ((verificar_ber(str)) != 0)
 		erro = 1;
-	if((verificar_x(data) != 0) || (verificar_y(data) != 0))
+	if ((verificar_x(data) != 0) || (verificar_y(data) != 0))
 		erro = 1;
 	return (erro);
 }

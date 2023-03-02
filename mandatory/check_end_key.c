@@ -12,23 +12,23 @@
 
 #include "../include/so_long.h"
 
-int act_a(t_data *data)
+int	act_a(t_data *data)
 {
-	if(data->map.map[data->map.y][data->map.x - 1] == 'E'
-		&& data->map.collect == 0)
-		return (1);
-	return 0;
-}
-
-int act_d(t_data *data)
-{
-	if(data->map.map[data->map.y][data->map.x + 1] == 'E'
+	if (data->map.map[data->map.y][data->map.x - 1] == 'E'
 		&& data->map.collect == 0)
 		return (1);
 	return (0);
 }
 
-int act_w(t_data *data)
+int	act_d(t_data *data)
+{
+	if (data->map.map[data->map.y][data->map.x + 1] == 'E'
+		&& data->map.collect == 0)
+		return (1);
+	return (0);
+}
+
+int	act_w(t_data *data)
 {
 	if (data->map.map[data->map.y - 1][data->map.x] == 'E'
 		&& data->map.collect == 0)
@@ -36,7 +36,7 @@ int act_w(t_data *data)
 	return (0);
 }
 
-int act_s(t_data *data)
+int	act_s(t_data *data)
 {
 	if (data->map.map[data->map.y + 1][data->map.x] == 'E'
 		&& data->map.collect == 0)

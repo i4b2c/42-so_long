@@ -26,9 +26,9 @@ void	iniciar(t_data *data)
 
 void	iniciar_jogo(t_data *data, char **av)
 {
-	int fd;
-	int x;
-	int y;
+	int	fd;
+	int	x;
+	int	y;
 
 	iniciar(data);
 	data->mlx = mlx_init();
@@ -45,5 +45,4 @@ void	iniciar_jogo(t_data *data, char **av)
 		encerrar_jogo_erro(data);
 	render_map(data);
 	mlx_loop(data->mlx);
-
 }

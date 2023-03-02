@@ -14,7 +14,7 @@
 
 int	check_key(t_data *data, int x)
 {
-	int			k;
+	int	k;
 
 	k = 0;
 	if (check_end(data, x) == 1 || check_end(data, x) == 2)
@@ -56,18 +56,18 @@ int	check_end(t_data *data, int x)
 {
 	data->map.exit_suc = 0;
 	if (x == A)
-		return(act_a(data));
+		return (act_a(data));
 	else if (x == D)
-		return(act_d(data));
+		return (act_d(data));
 	else if (x == W)
-		return(act_w(data));
+		return (act_w(data));
 	else if (x == S)
-		return(act_s(data));
+		return (act_s(data));
 	return (0);
 }
 
-void	colocar_movimento(int i,t_data *data)
+void	colocar_movimento(int i, t_data *data)
 {
 	(void)data;
-	ft_printf("movimentos: %d\n",i);
+	ft_printf("movimentos: %d\n", i);
 }

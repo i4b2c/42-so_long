@@ -22,8 +22,11 @@ int	funcao_x(int fd)
 	x = ft_strlen(s) - 1;
 	temp = x;
 	free(s);
-	while ((s = get_next_line(fd)))
+	while (1)
 	{
+		s = get_next_line(fd);
+		if (!s)
+			break ;
 		x = ft_strlen(s) - 1;
 		free(s);
 		if (temp != x)
@@ -38,8 +41,11 @@ int	funcao_y(int fd)
 	int		y;
 
 	y = 0;
-	while ((s = get_next_line(fd)))
+	while (1)
 	{
+		s = get_next_line(fd);
+		if (!s)
+			break ;
 		y++;
 		free(s);
 	}
