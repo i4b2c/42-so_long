@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: icaldas <icaldas@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/13 11:19:11 by icaldas           #+#    #+#             */
+/*   Updated: 2023/03/22 14:13:25 by icaldas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
@@ -55,7 +67,9 @@ typedef struct s_data
 	t_map	map;
 }				t_data;
 
+void	free_fd(int fd, char *s, char *str);
 int		erro_vazio(char *str);
+int		verificar_line(char *str);
 void	mudar_letra(t_data *data, int y, int x, int op);
 void	get_imagens(t_data *data);
 int		funcao_x(int fd);
@@ -73,7 +87,7 @@ int		key_handler(int keycode, t_data *data);
 int		mouse_hook(t_data *data);
 char	ler_o_xpm(int fd);
 void	get_map(t_data *data, int fd);
-int		options_map(t_data *data, int k , int i);
+int		options_map(t_data *data, int k, int i);
 void	colocar_fantasma_direcao(t_data *data, int x, int i);
 void	put_imagem(t_data *data, int op, int len_x, int len_y);
 void	ver_objetos(t_data *data);

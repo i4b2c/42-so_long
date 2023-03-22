@@ -1,5 +1,17 @@
-#ifndef SO_LONG_H
-# define SO_LONG_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long_bonus.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: icaldas <icaldas@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/13 11:20:57 by icaldas           #+#    #+#             */
+/*   Updated: 2023/03/22 14:13:28 by icaldas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include "../libft/src/libft.h"
 # include "../minilibx/mlx.h"
@@ -57,42 +69,44 @@ typedef struct s_data
 	t_map	map;
 }				t_data;
 
+void	free_fd(int fd, char *s, char *str);
 int		erro_vazio(char *str);
 void	mudar_letra(t_data *data, int y, int x, int op);
 void	get_imagens(t_data *data);
-int	funcao_x(int fd);
-int	funcao_y(int fd);
-int	act_a(t_data *data);
-int	act_w(t_data *data);
-int	act_d(t_data *data);
-int	act_s(t_data *data);
-int	check_end(t_data *data, int x);
+int		funcao_x(int fd);
+int		funcao_y(int fd);
+int		act_a(t_data *data);
+int		act_w(t_data *data);
+int		act_d(t_data *data);
+int		act_s(t_data *data);
+int		check_end(t_data *data, int x);
 void	colocar_movimento(int i, t_data *data);
 void	colocar_texto_e_acabar(int x, t_data *data);
-int	check_key(t_data *data, int x);
-int	prox_numero(int keycode, t_data *data);
-int	key_handler(int keycode, t_data *data);
-int	mouse_hook(t_data *data);
+int		check_key(t_data *data, int x);
+int		prox_numero(int keycode, t_data *data);
+int		key_handler(int keycode, t_data *data);
+int		mouse_hook(t_data *data);
 char	ler_o_xpm(int fd);
 void	get_map(t_data *data, int fd);
-int	options_map(t_data *data, int k , int i);
+int		options_map(t_data *data, int k, int i);
 void	colocar_fantasma_direcao(t_data *data, int x, int i);
 void	sprite_porta(t_data *data, int x, int y);
 void	put_imagem(t_data *data, int op, int len_x, int len_y);
 void	ver_objetos(t_data *data);
 void	render_map(t_data *data);
 char	*ft_strcpy(char *s1, char *s2);
-int	verificar_ber(char *str);
-int	verificar_x(t_data data);
-int	verificar_y(t_data data);
-int	ver_erro(int x, int y, char *str, t_data data);
+int		verificar_ber(char *str);
+int		verificar_x(t_data data);
+int		verificar_y(t_data data);
+int		ver_erro(int x, int y, char *str, t_data data);
 void	atribuir_col_e_lin(t_data *data, int x, int y);
 void	free_total(t_data *data);
-int	get_x_y(int *x, int *y, char **av);
+int		get_x_y(int *x, int *y, char **av);
 void	iniciar(t_data *data);
 void	iniciar_jogo(t_data *data, char **av);
 void	encerrar_jogo(t_data *data);
 void	encerrar_jogo_erro(t_data *data);
 void	colocar_imagem_door(t_data *data, int x);
+int		verificar_line(char *str);
 
 #endif

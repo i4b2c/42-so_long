@@ -10,6 +10,7 @@ SRC = mandatory/check_end_key.c \
       mandatory/iniciar.c \
       mandatory/key.c \
       mandatory/render.c \
+	  mandatory/erro_line.c \
 	  mandatory/main.c
 
 SRC_BONUS = bonus/check_end_key.c \
@@ -24,6 +25,7 @@ SRC_BONUS = bonus/check_end_key.c \
       		bonus/key.c \
       		bonus/render.c \
       		bonus/sprite.c \
+			bonus/erro_line.c \
 			bonus/main.c
 
 CC = cc

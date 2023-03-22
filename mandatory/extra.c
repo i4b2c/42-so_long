@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:39:39 by marvin            #+#    #+#             */
-/*   Updated: 2023/02/28 13:39:39 by marvin           ###   ########.fr       */
+/*   Updated: 2023/03/13 11:28:43 by icaldas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,15 @@ void	atribuir_col_e_lin(t_data *data, int x, int y)
 void	colocar_texto_e_acabar(int x, t_data *data)
 {
 	if (x == 1)
+	{
+		ft_printf("movimentos: %d\n", ++data->map.mov);
 		write(1, "You Won!!\n", 10);
+	}
 	else if (x == 2)
+	{
+		ft_printf("movimentos: %d\n", ++data->map.mov);
 		write(1, "You Died,Try Again!\n", 20);
+	}
 	encerrar_jogo(data);
 }
 

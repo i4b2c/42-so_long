@@ -22,7 +22,7 @@ int	erro_vazio(char *str)
 	s = malloc(1);
 	fd = open(str, O_RDONLY);
 	read (fd, s, 1);
-	if (!s[0])
+	if (!s[0] || s[0] != '1')
 		i = 1;
 	else
 		i = 0;
@@ -61,8 +61,10 @@ int	verificar_ber(char *str)
 int	verificar_x(t_data data)
 {
 	int	i;
+	int	j;
 
 	i = 0;
+	j = 0;
 	while (i < data.map.lin)
 	{
 		if (data.map.map[i][0] != '1'
