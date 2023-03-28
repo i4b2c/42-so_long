@@ -19,7 +19,7 @@ int	main(int ac, char **av)
 	if (ac == 2)
 	{
 		if (erro_vazio(av[1]) == 0
-			&& verificar_line(av[1]) == 0)
+			&& verificar_linha(av[1]) == 0)
 			iniciar_jogo(&data, av);
 		else
 			ft_printf("Error\n");

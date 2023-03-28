@@ -3,46 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   erro_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: icaldas <icaldas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 12:57:34 by icaldas           #+#    #+#             */
-/*   Updated: 2023/03/22 15:00:56 by icaldas          ###   ########.fr       */
+/*   Updated: 2023/03/28 13:46:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long_bonus.h"
 
-void	free_fd(int fd, char *s, char *str)
-{
-	close (fd);
-	free (s);
-	free (str);
-}
-
-int	verificar_line(char *str)
+int	verificar_linha(char *str)
 {
 	int		fd;
-	int		temp;
 	char	*s;
+	int		retorno;
 
-	temp = 0;
+	retorno = 0;
 	fd = open(str, O_RDONLY);
 	while (1)
 	{
 		s = get_next_line(fd);
 		if (!s)
 			break ;
-		if (temp != 0)
-		{
-			if (temp != ft_strlen(s))
-			{
-				free_fd(fd, s, str);
-				return (1);
-			}
-		}
-		temp = ft_strlen(s);
+		if (s[0] != '1')
+			retorno = (1);
 		free (s);
 	}
 	close (fd);
-	return (0);
+	return (retorno);
 }

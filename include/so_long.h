@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: icaldas <icaldas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:19:11 by icaldas           #+#    #+#             */
-/*   Updated: 2023/03/22 14:13:25 by icaldas          ###   ########.fr       */
+/*   Updated: 2023/03/28 13:47:21 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ typedef struct s_data
 
 void	free_fd(int fd, char *s, char *str);
 int		erro_vazio(char *str);
-int		verificar_line(char *str);
 void	mudar_letra(t_data *data, int y, int x, int op);
 void	get_imagens(t_data *data);
 int		funcao_x(int fd);
@@ -105,5 +104,6 @@ void	iniciar_jogo(t_data *data, char **av);
 void	encerrar_jogo(t_data *data);
 void	encerrar_jogo_erro(t_data *data);
 void	colocar_imagem_door(t_data *data, int x);
+int		verificar_linha(char *str);
 
 #endif
