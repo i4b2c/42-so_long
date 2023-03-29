@@ -61,10 +61,8 @@ int	verificar_ber(char *str)
 int	verificar_x(t_data data)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
 	while (i < data.map.lin)
 	{
 		if (data.map.map[i][0] != '1'
