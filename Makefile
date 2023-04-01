@@ -63,6 +63,7 @@ minilibx:
 fclean: clean
 		@$(RM) $(NAME)
 		@make fclean -C libft/
+
 extra: fclean
 	@$(RM) $(EXTRA)
 	#$(RM_GIT)

@@ -41,7 +41,7 @@ void	iniciar_jogo(t_data *data, char **av)
 	data->win = mlx_new_window(data->mlx, x * 64, y * 64, "so_long");
 	mlx_hook(data->win, 2, 1, key_handler, data);
 	mlx_hook(data->win, 17, 1, mouse_hook, data);
-	if (ver_erro(x, y, av[1], *data) == 1)
+	if (ver_erro(x, y, *data) == 1)
 		encerrar_jogo_erro(data);
 	render_map(data);
 	mlx_loop(data->mlx);

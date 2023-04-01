@@ -21,6 +21,6 @@ void	encerrar_jogo(t_data *data)
 void	encerrar_jogo_erro(t_data *data)
 {
 	free_total(data);
-	ft_printf("Error\n");
+	write(1,"Error\n",6);
 	exit(0);
 }
