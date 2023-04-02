@@ -96,7 +96,7 @@ int	verificar_y(t_data data)
 	return (0);
 }
 
-int	ver_erro(int x, int y, char *str, t_data data)
+int	ver_erro(int x, int y, t_data data)
 {
 	int	erro;
 
@@ -105,10 +105,6 @@ int	ver_erro(int x, int y, char *str, t_data data)
 		|| data.map.player_counter != 1)
 		erro = 1;
 	if (x == -1 || x == y)
-		erro = 1;
-	if ((verificar_ber(str)) != 0)
-		erro = 1;
-	if ((verificar_x(data) != 0) || (verificar_y(data) != 0))
 		erro = 1;
 	return (erro);
 }
