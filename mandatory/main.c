@@ -68,7 +68,7 @@ int	main(int ac, char **av)
 		else
 			write(1,"Error\n",6);
 	}
-	else
-		write(1,"Error\n",6);
+	//else
+	//	write(1,"Error\n",6);
 	return (0);
 }
