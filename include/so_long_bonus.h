@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:20:57 by icaldas           #+#    #+#             */
-/*   Updated: 2023/03/28 13:32:26 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/02 01:53:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char	*ft_strcpy(char *s1, char *s2);
 int		verificar_ber(char *str);
 int		verificar_x(t_data data);
 int		verificar_y(t_data data);
-int		ver_erro(int x, int y, char *str, t_data data);
+int		ver_erro(int x, int y, t_data data);
 void	atribuir_col_e_lin(t_data *data, int x, int y);
 void	free_total(t_data *data);
 int		get_x_y(int *x, int *y, char **av);
