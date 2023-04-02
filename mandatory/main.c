@@ -30,6 +30,7 @@ int verificar_len_linha(char *str)
 		len = ft_strlen(s);
 		free(s);
 	}
+	close(fd);
 	return 0;
 }
 
@@ -44,7 +45,11 @@ int extra(char *str)
 	while(s[i])
 		i++;
 	if(s[i-1] == '\n')
+	{
+		close(fd);
 		return 0;
+	}
+	close(fd);
 	return 1;
 }
 
