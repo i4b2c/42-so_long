@@ -65,6 +65,7 @@ int	key_handler(int keycode, t_data *data)
 	op = 0;
 	op = prox_numero(keycode, data);
 	data->map.keycode = keycode;
+	//void *temp = mlx_xpm_file_to_image(data->mlx,"./textures/coin1.xpm",&x,&y);
 	if (keycode == A && check_key(data, A) != 1)
 	{
 		mudar_letra(data, 0, -1, op);
