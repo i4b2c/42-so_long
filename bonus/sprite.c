@@ -31,32 +31,6 @@ void	colocar_imagem_door(t_data *data, int x)
 				DOOR_OPEN, &data->x1, &data->x2);
 }
 
-void	sprite_porta(t_data *d, int x, int y)
-{
-	if (d->map.collect == -1)
-		return ;
-	mlx_destroy_image(d->mlx, d->map.door);
-	colocar_imagem_door(d, 1);
-	mlx_put_image_to_window(d->mlx, d->win, d->map.door, 64 * x, 64 * y);
-	usleep(100000);
-	mlx_destroy_image(d->mlx, d->map.door);
-	colocar_imagem_door(d, 2);
-	mlx_put_image_to_window(d->mlx, d->win, d->map.door, 64 * x, 64 * y);
-	usleep(100000);
-	mlx_destroy_image(d->mlx, d->map.door);
-	colocar_imagem_door(d, 3);
-	mlx_put_image_to_window(d->mlx, d->win, d->map.door, 64 * x, 64 * y);
-	usleep(100000);
-	mlx_destroy_image(d->mlx, d->map.door);
-	colocar_imagem_door(d, 4);
-	mlx_put_image_to_window(d->mlx, d->win, d->map.door, 64 * x, 64 * y);
-	usleep(100000);
-	mlx_destroy_image(d->mlx, d->map.door);
-	colocar_imagem_door(d, 5);
-	mlx_put_image_to_window(d->mlx, d->win, d->map.door, 64 * x, 64 * y);
-	d->map.collect = -1;
-}
-
 void	colocar_fantasma_direcao(t_data *data, int x, int y)
 {
 	int	x_1;

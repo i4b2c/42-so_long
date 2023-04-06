@@ -15,7 +15,7 @@
 int	act_a(t_data *data)
 {
 	if (data->map.map[data->map.y][data->map.x - 1] == 'E'
-		&& data->map.collect == -1)
+		&& data->map.collect == 0)
 		return (1);
 	else if (data->map.map[data->map.y][data->map.x - 1] == 'N')
 		return (2);
@@ -25,7 +25,7 @@ int	act_a(t_data *data)
 int	act_d(t_data *data)
 {
 	if (data->map.map[data->map.y][data->map.x + 1] == 'E'
-		&& data->map.collect == -1)
+		&& data->map.collect == 0)
 		return (1);
 	else if (data->map.map[data->map.y][data->map.x + 1] == 'N')
 		return (2);
@@ -35,7 +35,7 @@ int	act_d(t_data *data)
 int	act_w(t_data *data)
 {
 	if (data->map.map[data->map.y - 1][data->map.x] == 'E'
-		&& data->map.collect == -1)
+		&& data->map.collect == 0)
 		return (1);
 	else if (data->map.map[data->map.y - 1][data->map.x] == 'N')
 		return (2);
@@ -45,7 +45,7 @@ int	act_w(t_data *data)
 int	act_s(t_data *data)
 {
 	if (data->map.map[data->map.y + 1][data->map.x] == 'E'
-		&& data->map.collect == -1)
+		&& data->map.collect == 0)
 		return (1);
 	else if (data->map.map[data->map.y + 1][data->map.x] == 'N')
 		return (2);

@@ -86,9 +86,7 @@ void	render_map(t_data *data)
 		}
 		k++;
 	}
-	if (data->map.collect == 0)
-		sprite_porta(data, data->map.exit_x, data->map.exit_y);
-	colocar_movimento(data->map.mov, data);
+	//colocar_movimento(data->map.mov, data);
 }
 
 void	get_map(t_data *data, int fd)

@@ -42,7 +42,7 @@ int	extra(char *str)
 
 	i = 0;
 	fd = open(str, O_RDONLY);
-	s = malloc(1024);
+	s = ft_calloc(1024,1);
 	read(fd, s, 1024);
 	while (s[i])
 		i++;
