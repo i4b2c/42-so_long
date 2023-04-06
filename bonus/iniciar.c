@@ -134,7 +134,7 @@ void mudar_inimigo(t_data *data)
 		{
 			if(data->map.map[x][y] == 'N')
 			{
-				num = rand()%4;
+				num = rand()%5;
 
 				if(check(data,x,y,num))
 				{
@@ -237,7 +237,7 @@ int atualizar(t_data *data)
 	}
 	if(k == 5000)
 	{
-		mudar_inimigo(data);//muda as posicoes do N por n e a direcao depois atualiza de novo para N
+		mudar_inimigo(data);
 		k = 0;
 	}
 	k++;
