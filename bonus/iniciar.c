@@ -156,6 +156,7 @@ int atualizar(t_data *data)
 	static int j;
 	static int i;
 	static int k;
+	static int l;
 	int x, y;
 	if(data->map.collect == 0 && j >= 0)
 	{
@@ -240,6 +241,20 @@ int atualizar(t_data *data)
 		mudar_inimigo(data);
 		k = 0;
 	}
+	if(l == 1000)
+	{
+		mlx_destroy_image(data->mlx, data->map.inimigo);
+		data->map.inimigo = mlx_xpm_file_to_image(data->mlx,"./textures/black_brick.xpm",&x,&y);
+		colocar_inimigo(data);
+	}
+	else if(l == 2000)
+	{
+		mlx_destroy_image(data->mlx, data->map.inimigo);
+		data->map.inimigo = mlx_xpm_file_to_image(data->mlx,"./textures/porcao.xpm",&x,&y);
+		colocar_inimigo(data);
+		l = 0;
+	}
+	l++;
 	k++;
 	colocar_movimento(data->map.mov,data);
 	i++;
