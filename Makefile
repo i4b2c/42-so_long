@@ -43,15 +43,12 @@ OBJ = $(SRC:%.c=%.o)
 OBJ_BONUS = $(SRC_BONUS:%.c=%.o)
 
 all: $(NAME)
-
 $(NAME): $(OBJ)
 		make -C libft/
 		@$(CC) $(CFLAGS) $(SRC) $(LIBFT) $(LIBSRC) $(LIBFLAG) -o $(NAME)
-
 bonus: $(OBJ_BONUS)
 		make -C libft/
 		@$(CC) $(CFLAGS) $(SRC_BONUS) $(LIBFT) $(LIBSRC) $(LIBFLAG) -o $(NAME)
-
 clean:
 		@$(RM) $(OBJ)
 		@$(RM) $(OBJ_BONUS)
@@ -59,14 +56,11 @@ clean:
 minilibx:
 	@$(GIT)
 	make -C minilibx
-
 fclean: clean
 		@$(RM) $(NAME)
 		@make fclean -C libft/
-
 extra: fclean
 	@$(RM) $(EXTRA)
-	#$(RM_GIT)
 re: extra all
 
 ez:
