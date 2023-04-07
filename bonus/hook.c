@@ -32,7 +32,6 @@ void	mudar_letra(t_data *data, int y, int x, int op)
 
 void	mudar_posicao(t_data *data, int y, int x)
 {
-	//data->map.map[data->map.y + y][data->map.x + x] = 'P';
 	int len_x;
 	int len_y;
 
@@ -40,8 +39,6 @@ void	mudar_posicao(t_data *data, int y, int x)
 	len_y = data->map.y + y;
 	mlx_put_image_to_window(data->mlx,data->win
 		,data->map.player,len_x * 64,len_y * 64);
-	//mlx_put_image_to_window(data->mlx,data->win
-	//	,data->map.grass,data->map.x * 64,data->map.y * 64);
 	if (data->map.exit_x - x == data->map.x - x
 		&& data->map.exit_y - y == data->map.y - y)
 		mlx_put_image_to_window(data->mlx,data->win
@@ -49,13 +46,34 @@ void	mudar_posicao(t_data *data, int y, int x)
 	else
 		mlx_put_image_to_window(data->mlx,data->win
 			,data->map.grass,data->map.x * 64,data->map.y * 64);
-	//printf("a\n");
-	/*if (data->map.exit_x - x == data->map.x - x
-		&& data->map.exit_y - y == data->map.y - y)
-		data->map.map[data->map.y][data->map.x] = 'E';
-	else
-		data->map.map[data->map.y][data->map.x] = '0';
-	*/
+}
+
+void mudar_a(t_data *data, int op)
+{
+	mudar_letra(data, 0, -1, op);
+	mudar_posicao(data,0,-1);
+	data->map.x--;
+}
+
+void mudar_d(t_data *data, int op)
+{
+	mudar_letra(data, 0, 1, op);
+	mudar_posicao(data,0,1);
+	data->map.x++;
+}
+
+void mudar_s(t_data *data, int op)
+{
+	mudar_letra(data, 1, 0, op);
+	mudar_posicao(data,1,0);
+	data->map.y++;
+}
+
+void mudar_w(t_data *data, int op)
+{
+	mudar_letra(data, -1, 0, op);
+	mudar_posicao(data,-1,0);
+	data->map.y--;
 }
 
 int	key_handler(int keycode, t_data *data)
@@ -65,37 +83,16 @@ int	key_handler(int keycode, t_data *data)
 	op = 0;
 	op = prox_numero(keycode, data);
 	data->map.keycode = keycode;
-	//void *temp = mlx_xpm_file_to_image(data->mlx,"./textures/coin1.xpm",&x,&y);
 	if (keycode == A && check_key(data, A) != 1)
-	{
-		mudar_letra(data, 0, -1, op);
-		mudar_posicao(data,0,-1);
-		//data->map.y += y;
-		data->map.x--;
-	}
+		mudar_a(data,op);
 	else if (keycode == D && check_key(data, D) != 1)
-	{
-		mudar_letra(data, 0, 1, op);
-		mudar_posicao(data,0,1);
-		//data->map.y += y;
-		data->map.x++;
-	}
+		mudar_d(data,op);
 	else if (keycode == S && check_key(data, S) != 1)
-	{
-		mudar_letra(data, 1, 0, op);
-		mudar_posicao(data,1,0);
-		data->map.y++;
-		//data->map.x += x;
-	}
+		mudar_s(data,op);
 	else if (keycode == W && check_key(data, W) != 1)
-	{
-		mudar_letra(data, -1, 0, op);
-		mudar_posicao(data,-1,0);
-		data->map.y--;
-	}
+		mudar_w(data,op);
 	else if (keycode == ESC)
 		encerrar_jogo(data);
-	//render_map(data);
 	return (0);
 }
 

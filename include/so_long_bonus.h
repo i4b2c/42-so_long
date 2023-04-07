@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:20:57 by icaldas           #+#    #+#             */
-/*   Updated: 2023/04/02 01:53:57 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/07 06:56:13 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 
 # define BRICK "./textures/black_brick.xpm"
 # define GRASS "./textures/wood.xpm"
-# define PLAYER "./textures/fantasma.xpm"
-# define PLAYER_R "./textures/fantasma_r.xpm"
+# define PLAYER "./textures/mario1.xpm"
+# define PLAYER_R "./textures/mario2.xpm"
 # define DOOR "./textures/door.xpm"
-# define COGUMELO "./textures/porcao.xpm"
+# define COGUMELO "./textures/coin1.xpm"
 # define DOOR_OPEN "./textures/door_open.xpm"
-# define BOY "./textures/fire.xpm"
+# define BOY "./textures/goomba1.xpm"
 # define WHITE 16777215
 # define ESC 65307
 # define A 97
@@ -90,7 +90,7 @@ char	ler_o_xpm(int fd);
 void	get_map(t_data *data, int fd);
 int		options_map(t_data *data, int k, int i);
 void	colocar_fantasma_direcao(t_data *data, int x, int i);
-void	sprite_porta(t_data *data, int x, int y);
+//void	sprite_porta(t_data *data, int x, int y);
 void	put_imagem(t_data *data, int op, int len_x, int len_y);
 void	ver_objetos(t_data *data);
 void	render_map(t_data *data);

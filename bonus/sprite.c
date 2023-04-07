@@ -14,6 +14,7 @@
 
 void	colocar_imagem_door(t_data *data, int x)
 {
+	mlx_destroy_image(data->mlx, data->map.door);
 	if (x == 1)
 		data->map.door = mlx_xpm_file_to_image(data->mlx,
 				"./textures/door2.xpm", &data->x1, &data->x2);

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:19:11 by icaldas           #+#    #+#             */
-/*   Updated: 2023/04/01 06:23:23 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/07 06:42:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 
 # define BRICK "./textures/black_brick.xpm"
 # define GRASS "./textures/wood.xpm"
-# define PLAYER "./textures/fantasma.xpm"
-# define PLAYER_R "./textures/fantasma_r.xpm"
+# define PLAYER "./textures/mario1.xpm"
+# define PLAYER_R "./textures/mario2.xpm"
 # define DOOR "./textures/door.xpm"
-# define COGUMELO "./textures/porcao.xpm"
+# define COGUMELO "./textures/coin1.xpm"
 # define DOOR_OPEN "./textures/door_open.xpm"
-# define BOY "./textures/fire.xpm"
+# define BOY "./textures/goomba1.xpm"
 # define WHITE 16777215
 # define ESC 65307
 # define A 97

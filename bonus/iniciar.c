@@ -135,12 +135,8 @@ void mudar_inimigo(t_data *data)
 			if(data->map.map[x][y] == 'N')
 			{
 				num = rand()%5;
-
 				if(check(data,x,y,num))
-				{
-					//printf("a");
 					mudar_posicao_inmg(data,x,y,num);
-				}
 				else
 					data->map.map[x][y] = 'n';
 			}
@@ -151,114 +147,130 @@ void mudar_inimigo(t_data *data)
 	recolocar_inimigo(data);
 }
 
+void sprite_porta(t_data *data, int i)
+{
+	colocar_imagem_door(data, i);
+	mlx_put_image_to_window(data->mlx,
+		data->win, data->map.door,
+		64 * data->map.exit_x, 64 * data->map.exit_y);
+
+}
+
+void check_sprite_porta(t_data *data, int *j)
+{
+	if(data->map.collect == 0 && *j >= 0)
+	{
+		if(*j > 1000)
+			*j = -2;
+		else if(*j == 200)
+			sprite_porta(data,1);
+		else if(*j == 400)
+			sprite_porta(data,2);
+		else if(*j == 600)
+			sprite_porta(data,3);
+		else if(*j == 800)
+			sprite_porta(data,4);
+		else if(*j == 1000)
+			sprite_porta(data,5);
+		(*j)++;
+	}
+}
+
+void colocar_imagem_coin(t_data *data , int x)
+{
+	mlx_destroy_image(data->mlx,data->map.cogumelo);
+	if (x == 1)
+		data->map.cogumelo = mlx_xpm_file_to_image(data->mlx,
+				"./textures/coin2.xpm", &data->x1, &data->x2);
+	else if (x == 2)
+		data->map.cogumelo = mlx_xpm_file_to_image(data->mlx,
+				"./textures/coin3.xpm", &data->x1, &data->x2);
+	else if (x == 3)
+		data->map.cogumelo = mlx_xpm_file_to_image(data->mlx,
+				"./textures/coin4.xpm", &data->x1, &data->x2);
+	else if (x == 4)
+		data->map.cogumelo = mlx_xpm_file_to_image(data->mlx,
+				"./textures/coin5.xpm", &data->x1, &data->x2);
+	else if (x == 5)
+		data->map.cogumelo = mlx_xpm_file_to_image(data->mlx,
+				"./textures/coin6.xpm", &data->x1, &data->x2);
+	else
+		data->map.cogumelo = mlx_xpm_file_to_image(data->mlx,
+				"./textures/coin1.xpm", &data->x1, &data->x2);
+}
+
+void sprite_coin(t_data *data, int i)
+{
+	colocar_imagem_coin(data,i);
+	colocar_cogumelo(data);
+}
+
+void check_sprite_coin(t_data *data, int *i)
+{
+	if(*i == 500)
+		sprite_coin(data,1);
+	else if(*i == 1000)
+		sprite_coin(data,2);
+	else if(*i == 1500)
+		sprite_coin(data,3);
+	else if(*i == 2000)
+		sprite_coin(data,4);
+	else if(*i == 2500)
+		sprite_coin(data,5);
+	else if(*i == 3000)
+	{
+		sprite_coin(data,6);
+		*i = 0;
+	}
+}
+
+void check_mov_inimigo(t_data *data, int *k)
+{
+	if(*k == 5000)
+	{
+		mudar_inimigo(data);
+		*k = 0;
+	}
+}
+
+void check_sprite_inimigo(t_data *data, int *l)
+{
+	int x;
+	int y;
+
+	if(*l == 5000)
+	{
+		mlx_destroy_image(data->mlx, data->map.inimigo);
+		data->map.inimigo = mlx_xpm_file_to_image(data->mlx,
+			"./textures/goomba1.xpm",&x,&y);
+		colocar_inimigo(data);
+	}
+	else if(*l == 10000)
+	{
+		mlx_destroy_image(data->mlx, data->map.inimigo);
+		data->map.inimigo = mlx_xpm_file_to_image(data->mlx,
+			"./textures/goomba2.xpm",&x,&y);
+		colocar_inimigo(data);
+		*l = 0;
+	}
+}
+
 int atualizar(t_data *data)
 {
 	static int j;
 	static int i;
 	static int k;
 	static int l;
-	int x, y;
-	if(data->map.collect == 0 && j >= 0)
-	{
-		if(j > 250)
-			j = -2;
-		else if(j == 50)
-		{
-			mlx_destroy_image(data->mlx, data->map.door);
-			colocar_imagem_door(data, 1);
-			mlx_put_image_to_window(data->mlx,
-				data->win, data->map.door, 64 * data->map.exit_x, 64 * data->map.exit_y);
-		}
-		else if(j == 100)
-		{
-			mlx_destroy_image(data->mlx, data->map.door);
-			colocar_imagem_door(data, 2);
-			mlx_put_image_to_window(data->mlx,
-				data->win, data->map.door, 64 * data->map.exit_x, 64 * data->map.exit_y);
-		}
-		else if(j == 150)
-		{
-			mlx_destroy_image(data->mlx, data->map.door);
-			colocar_imagem_door(data, 3);
-			mlx_put_image_to_window(data->mlx,
-				data->win, data->map.door, 64 * data->map.exit_x, 64 * data->map.exit_y);
-		}
-		else if(j == 200)
-		{
-			mlx_destroy_image(data->mlx, data->map.door);
-			colocar_imagem_door(data, 4);
-			mlx_put_image_to_window(data->mlx,
-				data->win, data->map.door, 64 * data->map.exit_x, 64 * data->map.exit_y);
-		}
-		else if(j == 250)
-		{
-			mlx_destroy_image(data->mlx, data->map.door);
-			colocar_imagem_door(data, 5);
-			mlx_put_image_to_window(data->mlx,
-				data->win, data->map.door, 64 * data->map.exit_x, 64 * data->map.exit_y);
-		}
-		j++;
-	}
-	if(i == 500)
-	{
-		mlx_destroy_image(data->mlx, data->map.cogumelo);
-		data->map.cogumelo = mlx_xpm_file_to_image(data->mlx,"./textures/coin2.xpm",&x,&y);
-		colocar_cogumelo(data);
-	}
-	else if(i == 1000)
-	{
-		mlx_destroy_image(data->mlx, data->map.cogumelo);
-		data->map.cogumelo = mlx_xpm_file_to_image(data->mlx,"./textures/coin3.xpm",&x,&y);
-		colocar_cogumelo(data);
-	}
-	else if(i == 1500)
-	{
-		mlx_destroy_image(data->mlx, data->map.cogumelo);
-		data->map.cogumelo = mlx_xpm_file_to_image(data->mlx,"./textures/coin4.xpm",&x,&y);
-		colocar_cogumelo(data);
-	}
-	else if(i == 2000)
-	{
-		mlx_destroy_image(data->mlx, data->map.cogumelo);
-		data->map.cogumelo = mlx_xpm_file_to_image(data->mlx,"./textures/coin5.xpm",&x,&y);
-		colocar_cogumelo(data);
-	}
-	else if(i == 2500)
-	{
-		mlx_destroy_image(data->mlx, data->map.cogumelo);
-		data->map.cogumelo = mlx_xpm_file_to_image(data->mlx,"./textures/coin6.xpm",&x,&y);
-		colocar_cogumelo(data);
-	}
-	else if(i == 3000)
-	{
-		mlx_destroy_image(data->mlx, data->map.cogumelo);
-		data->map.cogumelo = mlx_xpm_file_to_image(data->mlx,"./textures/coin1.xpm",&x,&y);
-		colocar_cogumelo(data);
-		i = 0;
-	}
-	if(k == 5000)
-	{
-		mudar_inimigo(data);
-		k = 0;
-	}
-	if(l == 1000)
-	{
-		mlx_destroy_image(data->mlx, data->map.inimigo);
-		data->map.inimigo = mlx_xpm_file_to_image(data->mlx,"./textures/black_brick.xpm",&x,&y);
-		colocar_inimigo(data);
-	}
-	else if(l == 2000)
-	{
-		mlx_destroy_image(data->mlx, data->map.inimigo);
-		data->map.inimigo = mlx_xpm_file_to_image(data->mlx,"./textures/porcao.xpm",&x,&y);
-		colocar_inimigo(data);
-		l = 0;
-	}
+
+	check_sprite_porta(data,&j);
+	check_sprite_coin(data,&i);
+	check_mov_inimigo(data,&k);
+	check_sprite_inimigo(data,&l);
+	colocar_movimento(data->map.mov,data);
 	l++;
 	k++;
-	colocar_movimento(data->map.mov,data);
 	i++;
-	return 0;
+	return (0);
 }
 
 void loop(t_data *data)
