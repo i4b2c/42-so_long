@@ -48,7 +48,7 @@ $(NAME): $(OBJ)
 		@$(CC) $(CFLAGS) $(SRC) $(LIBFT) $(LIBSRC) $(LIBFLAG) -o $(NAME)
 bonus: $(OBJ_BONUS)
 		make -C libft/
-		@$(CC) $(CFLAGS) $(SRC_BONUS) $(LIBFT) $(LIBSRC) $(LIBFLAG) -o $(NAME)
+		@$(CC) $(CFLAGS) $(SRC_BONUS) $(LIBFT) $(LIBSRC) $(LIBFLAG) -o $(NAME)_bonus
 clean:
 		@$(RM) $(OBJ)
 		@$(RM) $(OBJ_BONUS)
@@ -58,6 +58,7 @@ minilibx:
 	make -C minilibx
 fclean: clean
 		@$(RM) $(NAME)
+		@$(RM) $(NAME)_bonus
 		@make fclean -C libft/
 extra: fclean
 	@$(RM) $(EXTRA)

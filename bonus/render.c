@@ -86,7 +86,6 @@ void	render_map(t_data *data)
 		}
 		k++;
 	}
-	//colocar_movimento(data->map.mov, data);
 }
 
 void	get_map(t_data *data, int fd)

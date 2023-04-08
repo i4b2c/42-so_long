@@ -19,13 +19,13 @@ int	erro_vazio(char *str)
 	int		i;
 
 	i = 0;
-	s = malloc(1);
+	s = ft_calloc(1,1);
+	if (!s)
+		return 1;
 	fd = open(str, O_RDONLY);
 	read (fd, s, 1);
 	if (!s[0])
 		i = 1;
-	else
-		i = 0;
 	free (s);
 	close (fd);
 	return (i);
@@ -58,53 +58,63 @@ int	verificar_ber(char *str)
 	return (1);
 }
 
-int	verificar_x(t_data data)
+int	verificar_x(char *str)
 {
 	int	i;
+	int	temp;
+	char *s;
+	int fd;
+	int temp2;
 
+	fd = open(str,O_RDONLY);
+	temp = 0;
 	i = 0;
-	while (i < data.map.lin)
+	while (1)
 	{
-		if (data.map.map[i][0] != '1'
-			|| data.map.map[i][data.map.col - 1] != '1')
-			return (1);
+		s = get_next_line(fd);
+		if (!s)
+			break ;
+		temp2 = ft_strlen(s);
+		if (s[0] != '1'
+		|| s[temp2-2] != '1')
+			temp = 1;
+		free(s);
 		i++;
 	}
-	return (0);
+	close(fd);
+	return (temp);
 }
 
-int	verificar_y(t_data data)
+int verificar_y(char *str)
 {
-	int	i;
-	int	j;
+	int fd;
+	char *s;
+	int i;
+	int j;
+	int temp;
+	int temp2;
 
+	temp = 0;
 	i = 0;
-	while (i < data.map.lin)
+	fd = open(str,O_RDONLY);
+	temp2 = contar_linha(str);
+	while(1)
 	{
-		if (i == 0 || i == data.map.lin - 1)
+		s = get_next_line(fd);
+		if(!s)
+			break;
+		if(!i || i == temp2-1)
 		{
 			j = 0;
-			while (j < data.map.col)
+			while(s[j] != '\n' && s[j])
 			{
-				if (data.map.map[i][j] != '1')
-					return (1);
+				if(s[j] != '1')
+					temp = 1;
 				j++;
 			}
 		}
+		free(s);
 		i++;
 	}
-	return (0);
-}
-
-int	ver_erro(int x, int y, t_data data)
-{
-	int	erro;
-
-	erro = 0;
-	if (data.map.collect == 0 || data.map.exit != 1
-		|| data.map.player_counter != 1)
-		erro = 1;
-	if (x == -1 || x == y)
-		erro = 1;
-	return (erro);
+	return temp;
 }

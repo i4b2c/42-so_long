@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:20:57 by icaldas           #+#    #+#             */
-/*   Updated: 2023/04/07 06:56:13 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/08 11:45:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ typedef struct s_data
 	t_map	map;
 }				t_data;
 
+void free_path(char **str);
+char **replicar_map(char *av);
+int contar_linha(char *str);
 void	free_fd(int fd, char *s, char *str);
 int		erro_vazio(char *str);
 void	mudar_letra(t_data *data, int y, int x, int op);
@@ -96,8 +99,8 @@ void	ver_objetos(t_data *data);
 void	render_map(t_data *data);
 char	*ft_strcpy(char *s1, char *s2);
 int		verificar_ber(char *str);
-int		verificar_x(t_data data);
-int		verificar_y(t_data data);
+int		verificar_x(char *str);
+int		verificar_y(char *str);
 int		ver_erro(int x, int y, t_data data);
 void	atribuir_col_e_lin(t_data *data, int x, int y);
 void	free_total(t_data *data);

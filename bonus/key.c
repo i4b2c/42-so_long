@@ -71,7 +71,7 @@ void	colocar_movimento(int i, t_data *data)
 	char	*str;
 
 	str = ft_itoa(i);
-	mlx_put_image_to_window(data->mlx,data->win,data->map.brick,64,0);
+	mlx_put_image_to_window(data->mlx, data->win, data->map.brick, 64, 0);
 	mlx_string_put(data->mlx, data->win, 20, 32, WHITE, "movimentos:");
 	mlx_string_put(data->mlx, data->win, 96, 32, WHITE, str);
 	free (str);
