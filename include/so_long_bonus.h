@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:20:57 by icaldas           #+#    #+#             */
-/*   Updated: 2023/04/08 11:45:39 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/10 15:21:25 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,33 @@ typedef struct s_data
 	int		x2;
 	t_map	map;
 }				t_data;
+
+//ERRO//
+int square_map(char **str);
+
+//ERRO1//
+int check_dobro(int p, int e, int c);
+int verificar_dobro(char *str);
+int check_extra_word(char *str);
+int check_extra_key(char *str);
+int verificar_len_linha(char *str);
+
+//ERRO2//
+int check_side_ff(char **str, int x, int y);
+void flood_fill(char **str, int x, int y);
+void free_path(char **str);
+int check_path(char *str);
+void check_p_e_c(char *str, int *p, int *e, int *c);
+
+//ERRO3//
+int extra(char *str);
+int contar_linha(char *str);
+char **replicar_map(char *av);
+int check_path_valid(char **str);
+void get_player(char **str,int *x, int *y);
+
+//ERRO_MAIN//
+int erro(char *str);
 
 void free_path(char **str);
 char **replicar_map(char *av);

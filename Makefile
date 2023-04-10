@@ -15,7 +15,6 @@ SRC = mandatory/check_end_key.c \
 
 SRC_BONUS = bonus/check_end_key.c \
       		bonus/encerrar.c \
-     		bonus/erro.c \
       		bonus/extra.c \
       		bonus/free.c \
       		bonus/get_x_y.c \
@@ -26,6 +25,11 @@ SRC_BONUS = bonus/check_end_key.c \
       		bonus/render.c \
       		bonus/sprite.c \
 			bonus/erro_line.c \
+			bonus/erro.c \
+			bonus/erro1.c \
+			bonus/erro2.c \
+			bonus/erro3.c \
+			bonus/erro_main.c \
 			bonus/main.c
 
 CC = cc
@@ -44,9 +48,11 @@ OBJ_BONUS = $(SRC_BONUS:%.c=%.o)
 
 all: $(NAME)
 $(NAME): $(OBJ)
+		@$(RM) $(OBJ_BONUS)
 		make -C libft/
 		@$(CC) $(CFLAGS) $(SRC) $(LIBFT) $(LIBSRC) $(LIBFLAG) -o $(NAME)
 bonus: $(OBJ_BONUS)
+		@$(RM) $(OBJ)
 		make -C libft/
 		@$(CC) $(CFLAGS) $(SRC_BONUS) $(LIBFT) $(LIBSRC) $(LIBFLAG) -o $(NAME)_bonus
 clean:

@@ -269,6 +269,43 @@ int verificar_dobro(char *str)
 	return (0);
 }
 
+int check_extra_word(char *str)
+{
+	int i;
+
+	i = 0;
+	while(str[i] && str[i] != '\n')
+	{
+		if(str[i] != '1' && str[i] != '0'
+			&& str[i] != 'P' && str[i] != 'C'
+			&& str[i] != 'E')
+			return 1;
+		i++;
+	}
+	return 0;
+}
+
+int check_extra_key(char *str)
+{
+	int fd;
+	char *s;
+	int temp;
+
+	temp = 0;
+	fd = open(str,O_RDONLY);
+	while(1)
+	{
+		s = get_next_line(fd);
+		if (!s)
+			break;
+		if (check_extra_word(s))
+			temp = 1;
+		free (s);
+	}
+	close(fd);
+	return temp;
+}
+
 int	erro(char *str)
 {
 	int	i;
@@ -281,6 +318,8 @@ int	erro(char *str)
 	else if (erro_vazio(str))
 		i = 1;
 	else if (extra(str))
+		i = 1;
+	else if (check_extra_key(str))
 		i = 1;
 	else if (verificar_linha(str))
 		i = 1;

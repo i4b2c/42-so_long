@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   erro_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 13:50:38 by marvin            #+#    #+#             */
-/*   Updated: 2023/04/05 16:22:18 by icaldas          ###   ########.fr       */
+/*   Created: 2023/04/09 21:51:33 by marvin            #+#    #+#             */
+/*   Updated: 2023/04/09 21:51:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long_bonus.h"
 
-int	main(int ac, char **av)
+int	erro(char *str)
 {
-	t_data	data;
+	int	i;
 
-	if (ac == 2)
-	{
-		if (!erro(av[1]) && !square_map(av))
-			iniciar_jogo(&data, av);
-		else
-			write(1, "Error\n", 6);
-	}
-	return (0);
+	i = 0;
+	if (verificar_ber(str))
+		i = 1;
+	else if (erro_vazio(str))
+		i = 1;
+	else if (extra(str))
+		i = 1;
+	else if (verificar_x(str) || verificar_y(str))
+		i = 1;
+	else if (verificar_linha(str))
+		i = 1;
+	else if (verificar_len_linha(str))
+		i = 1;
+	else if (verificar_dobro(str))
+		i = 1;
+	else if (check_path(str))
+		i = 1;
+	return (i);
 }
