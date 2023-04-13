@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:20:57 by icaldas           #+#    #+#             */
-/*   Updated: 2023/04/10 15:21:25 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/13 23:25:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,74 +69,131 @@ typedef struct s_data
 	t_map	map;
 }				t_data;
 
-//ERRO//
-int square_map(char **str);
+//CHECK_END_KEY//
+int		act_a(t_data *data);
+int		act_d(t_data *data);
+int		act_w(t_data *data);
+int		act_s(t_data *data);
 
-//ERRO1//
-int check_dobro(int p, int e, int c);
-int verificar_dobro(char *str);
-int check_extra_word(char *str);
-int check_extra_key(char *str);
-int verificar_len_linha(char *str);
+//CHECK_SPRITE//
+void	check_sprite_inimigo(t_data *data, int *l);
+void	check_sprite_coin(t_data *data, int *i);
+void	check_sprite_porta(t_data *data, int *j);
+int		check(t_data *data, int x, int y, int num);
 
-//ERRO2//
-int check_side_ff(char **str, int x, int y);
-void flood_fill(char **str, int x, int y);
-void free_path(char **str);
-int check_path(char *str);
-void check_p_e_c(char *str, int *p, int *e, int *c);
-
-//ERRO3//
-int extra(char *str);
-int contar_linha(char *str);
-char **replicar_map(char *av);
-int check_path_valid(char **str);
-void get_player(char **str,int *x, int *y);
+//ENCERRAR//
+void	encerrar_jogo(t_data *data);
+void	encerrar_jogo_erro(t_data *data);
 
 //ERRO_MAIN//
-int erro(char *str);
+int		erro(char *str);
 
-void free_path(char **str);
-char **replicar_map(char *av);
-int contar_linha(char *str);
-void	free_fd(int fd, char *s, char *str);
+//ERRO//
+int		square_map(char **str);
 int		erro_vazio(char *str);
-void	mudar_letra(t_data *data, int y, int x, int op);
-void	get_imagens(t_data *data);
-int		funcao_x(int fd);
-int		funcao_y(int fd);
-int		act_a(t_data *data);
-int		act_w(t_data *data);
-int		act_d(t_data *data);
-int		act_s(t_data *data);
-int		check_end(t_data *data, int x);
-void	colocar_movimento(int i, t_data *data);
-void	colocar_texto_e_acabar(int x, t_data *data);
-int		check_key(t_data *data, int x);
-int		prox_numero(int keycode, t_data *data);
-int		key_handler(int keycode, t_data *data);
-int		mouse_hook(t_data *data);
-char	ler_o_xpm(int fd);
-void	get_map(t_data *data, int fd);
-int		options_map(t_data *data, int k, int i);
-void	colocar_fantasma_direcao(t_data *data, int x, int i);
-//void	sprite_porta(t_data *data, int x, int y);
-void	put_imagem(t_data *data, int op, int len_x, int len_y);
-void	ver_objetos(t_data *data);
-void	render_map(t_data *data);
-char	*ft_strcpy(char *s1, char *s2);
 int		verificar_ber(char *str);
 int		verificar_x(char *str);
 int		verificar_y(char *str);
-int		ver_erro(int x, int y, t_data data);
-void	atribuir_col_e_lin(t_data *data, int x, int y);
-void	free_total(t_data *data);
-int		get_x_y(int *x, int *y, char **av);
-void	iniciar(t_data *data);
-void	iniciar_jogo(t_data *data, char **av);
-void	encerrar_jogo(t_data *data);
-void	encerrar_jogo_erro(t_data *data);
-void	colocar_imagem_door(t_data *data, int x);
+
+//ERRO1//
+int		check_dobro(int p, int e, int c);
+int		verificar_dobro(char *str);
+int		check_extra_word(char *str);
+int		check_extra_key(char *str);
+int		verificar_len_linha(char *str);
+
+//ERRO2//
+int		check_side_ff(char **str, int x, int y);
+void	flood_fill(char **str, int x, int y);
+void	free_path(char **str);
+int		check_path(char *str);
+void	check_p_e_c(char *str, int *p, int *e, int *c);
+
+//ERRO3//
+int		extra(char *str);
+int		contar_linha(char *str);
+char	**replicar_map(char *av);
+int		check_path_valid(char **str);
+void	get_player(char **str, int *x, int *y);
+
+//ERRO4//
+void	iniciar_line_y(int *fd, char *str, int *i);
+void	erro_line_y(int i);
+void	verificar_line_y(char *s, int i, int *k);
 int		verificar_linha(char *str);
+int		verificar_no_key(char *str);
+
+//ERRO5//
+int		check_no_key_func(char *str);
+
+//EXTRA//
+char	*ft_strcpy(char *s1, char *s2);
+void	atribuir_col_e_lin(t_data *data, int x, int y);
+void	colocar_texto_e_acabar(int x, t_data *data);
+void	get_imagens(t_data *data);
+
+//FREE//
+void	free_total(t_data *data);
+
+//GET_X_Y//
+int		funcao_x(int fd);
+int		funcao_y(int fd);
+
+//GET//
+int		get_x_y(int *x, int *y, char **av);
+char	ler_o_xpm(int fd);
+
+//HOOK_CHANGE//
+void	mudar_a(t_data *data, int op);
+void	mudar_d(t_data *data, int op);
+void	mudar_w(t_data *data, int op);
+void	mudar_s(t_data *data, int op);
+
+//HOOK//
+void	mudar_letra(t_data *data, int y, int x, int op);
+void	mudar_posicao(t_data *data, int y, int x);
+int		key_handler(int keycode, t_data *data);
+int		mouse_hook(t_data *data);
+
+//INICIAR//
+void	iniciar_jogo(t_data *data, char **av);
+void	iniciar(t_data *data);
+
+//INIMIGO//
+void	colocar_inimigo(t_data *data);
+void	mudar_posicao_inmg(t_data *data, int x, int y, int num);
+void	recolocar_inimigo(t_data *data);
+void	mudar_inimigo(t_data *data);
+void	check_mov_inimigo(t_data *data, int *k);
+
+//KEY//
+int		check_key(t_data *data, int x);
+int		prox_numero(int keycode, t_data *data);
+int		check_end(t_data *data, int x);
+void	colocar_movimento(int i, t_data *data);
+
+//LOOP//
+int		atualizar(t_data *data);
+void	loop(t_data *data);
+
+//PUT_IMAGE//
+void	sprite_porta(t_data *data, int i);
+void	colocar_imagem_coin(t_data *data, int x);
+void	sprite_coin(t_data *data, int i);
+void	colocar_cogumelo(t_data *data);
+
+//RENDER//
+void	put_imagem(t_data *data, int op, int len_x, int len_y);
+void	ver_objetos(t_data *data);
+void	render_map(t_data *data);
+void	get_map(t_data *data, int fd);
+int		options_map(t_data *data, int k, int i);
+
+//SPRITE//
+void	colocar_imagem_door(t_data *data, int x);
+void	colocar_fantasma_direcao(t_data *data, int x, int y);
+
+//MAIN//
+int main(int ac, char **av);
 
 #endif

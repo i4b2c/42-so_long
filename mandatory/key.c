@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/so_long_bonus.h"
 
 int	check_key(t_data *data, int x)
 {
-	int	k;
+	int			k;
 
 	k = 0;
 	if (check_end(data, x) == 1 || check_end(data, x) == 2)
@@ -31,8 +31,6 @@ int	check_key(t_data *data, int x)
 	else if (x == S
 		&& data->map.map[data->map.y + 1][data->map.x] == '1')
 			k = 1;
-	if (k == 0)
-		colocar_movimento(++data->map.mov, data);
 	return (k);
 }
 
@@ -68,6 +66,11 @@ int	check_end(t_data *data, int x)
 
 void	colocar_movimento(int i, t_data *data)
 {
-	(void)data;
-	ft_printf("movimentos: %d\n", i);
+	char	*str;
+
+	str = ft_itoa(i);
+	mlx_put_image_to_window(data->mlx, data->win, data->map.brick, 64, 0);
+	mlx_string_put(data->mlx, data->win, 20, 32, WHITE, "movimentos:");
+	mlx_string_put(data->mlx, data->win, 96, 32, WHITE, str);
+	free (str);
 }

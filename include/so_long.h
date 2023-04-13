@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:19:11 by icaldas           #+#    #+#             */
-/*   Updated: 2023/04/08 19:59:41 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/13 23:25:30 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_data
 
 
 void free_path(char **str);
-char **replicar_map(char *av);
+char ** replicar_map(char *av);
 int contar_linha(char *str);
 void	free_fd(int fd, char *s, char *str);
 int		erro_vazio(char *str);

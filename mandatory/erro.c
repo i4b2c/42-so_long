@@ -10,22 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/so_long_bonus.h"
+
+int	square_map(char **str)
+{
+	int	x;
+	int	y;
+
+	get_x_y(&x, &y, str);
+	if (x == y)
+		return (1);
+	return (0);
+}
 
 int	erro_vazio(char *str)
 {
-	char	*s;
 	int		fd;
+	char	*s;
 	int		i;
 
 	i = 0;
-	s = ft_calloc(1,1);
-	if (!s)
-		return 1;
+	s = malloc(1);
 	fd = open(str, O_RDONLY);
 	read (fd, s, 1);
-	if (!s[0])
+	if (!s[0] || s[0] != '1')
 		i = 1;
+	else
+		i = 0;
 	free (s);
 	close (fd);
 	return (i);
@@ -54,19 +65,19 @@ int	verificar_ber(char *str)
 		}
 		i++;
 	}
-	free(frase);
+	free (frase);
 	return (1);
 }
 
 int	verificar_x(char *str)
 {
-	int	i;
-	int	temp;
-	char *s;
-	int fd;
-	int temp2;
+	int		i;
+	int		temp;
+	char	*s;
+	int		fd;
+	int		temp2;
 
-	fd = open(str,O_RDONLY);
+	fd = open(str, O_RDONLY);
 	temp = 0;
 	i = 0;
 	while (1)
@@ -76,45 +87,33 @@ int	verificar_x(char *str)
 			break ;
 		temp2 = ft_strlen(s);
 		if (s[0] != '1'
-		|| s[temp2-2] != '1')
+			|| s[temp2 - 2] != '1')
 			temp = 1;
-		free(s);
+		free (s);
 		i++;
 	}
-	close(fd);
+	close (fd);
 	return (temp);
 }
 
-int verificar_y(char *str)
+int	verificar_y(char *str)
 {
-	int fd;
-	char *s;
-	int i;
-	int j;
-	int temp;
-	int temp2;
+	int		fd;
+	char	*s;
+	int		i;
+	int		temp2;
 
-	temp = 0;
 	i = 0;
-	fd = open(str,O_RDONLY);
-	temp2 = contar_linha(str);
-	while(1)
+	iniciar_line_y(&fd, str, &temp2);
+	while (1)
 	{
 		s = get_next_line(fd);
-		if(!s)
-			break;
-		if(!i || i == temp2-1)
-		{
-			j = 0;
-			while(s[j] != '\n' && s[j])
-			{
-				if(s[j] != '1')
-					temp = 1;
-				j++;
-			}
-		}
-		free(s);
+		if (!s)
+			break ;
+		verificar_line_y(s, i, &temp2);
 		i++;
+		free (s);
 	}
-	return temp;
+	erro_line_y(temp2);
+	return (0);
 }

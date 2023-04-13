@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/so_long_bonus.h"
 
 void	encerrar_jogo(t_data *data)
 {
@@ -21,6 +21,6 @@ void	encerrar_jogo(t_data *data)
 void	encerrar_jogo_erro(t_data *data)
 {
 	free_total(data);
-	write(1, "Error\n", 6);
+	ft_printf("Error\n");
 	exit(0);
 }

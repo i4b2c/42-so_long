@@ -6,11 +6,11 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/28 13:39:39 by marvin            #+#    #+#             */
-/*   Updated: 2023/03/13 11:28:43 by icaldas          ###   ########.fr       */
+/*   Updated: 2023/02/28 13:39:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/so_long_bonus.h"
 
 char	*ft_strcpy(char *s1, char *s2)
 {
@@ -36,13 +36,13 @@ void	colocar_texto_e_acabar(int x, t_data *data)
 {
 	if (x == 1)
 	{
-		ft_printf("movimentos: %d\n", ++data->map.mov);
+		ft_printf("movimentos: %d\n",data->map.mov);
 		write(1, "You Won!!\n", 10);
 	}
 	else if (x == 2)
 	{
-		ft_printf("movimentos: %d\n", ++data->map.mov);
 		write(1, "You Died,Try Again!\n", 20);
+	ft_printf("movimentos: %d\n",data->map.mov);
 	}
 	encerrar_jogo(data);
 }
@@ -57,4 +57,6 @@ void	get_imagens(t_data *data)
 	data->map.player = mlx_xpm_file_to_image(data->mlx, PLAYER, &x, &y);
 	data->map.door = mlx_xpm_file_to_image(data->mlx, DOOR, &x, &y);
 	data->map.grass = mlx_xpm_file_to_image(data->mlx, GRASS, &x, &y);
+	data->map.door_open = mlx_xpm_file_to_image(data->mlx, DOOR_OPEN, &x, &y);
+	data->map.inimigo = mlx_xpm_file_to_image(data->mlx, BOY, &x, &y);
 }

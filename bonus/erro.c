@@ -96,35 +96,6 @@ int	verificar_x(char *str)
 	return (temp);
 }
 
-void iniciar_line_y(int *fd, char *str, int *temp2)
-{
-	*fd = open(str, O_RDONLY);
-	*temp2 = contar_linha(str) - 1;
-}
-
-void erro_line_y(int temp2)
-{
-	if (temp2 == 1)
-	{
-		write(1, "Error\n", 6);
-		exit (0);
-	}
-}
-
-void verificar_line_y(char *s, int i ,int *temp2)
-{
-	int j;
-
-	j = 0;
-	while (s[j] != '\n' && s[j]
-		&& ((!i || i == *temp2) && *temp2 != 1))
-		{
-			if (s[j] != '1')
-				*temp2 = 1;
-			j++;
-		}
-}
-
 int	verificar_y(char *str)
 {
 	int		fd;
@@ -133,13 +104,13 @@ int	verificar_y(char *str)
 	int		temp2;
 
 	i = 0;
-	iniciar_line_y(&fd,str,&temp2);
+	iniciar_line_y(&fd, str, &temp2);
 	while (1)
 	{
 		s = get_next_line(fd);
 		if (!s)
 			break ;
-		verificar_line_y(s,i,&temp2);
+		verificar_line_y(s, i, &temp2);
 		i++;
 		free (s);
 	}

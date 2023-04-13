@@ -47,46 +47,6 @@ void	mudar_posicao(t_data *data, int y, int x)
 			data->map.grass, data->map.x * 64, data->map.y * 64);
 }
 
-void	mudar_a(t_data *data, int op)
-{
-	int	x;
-	int	y;
-
-	mlx_destroy_image(data->mlx, data->map.player);
-	data->map.player = mlx_xpm_file_to_image(data->mlx,
-			PLAYER_R, &y, &x);
-	mudar_letra(data, 0, -1, op);
-	mudar_posicao(data, 0, -1);
-	data->map.x--;
-}
-
-void	mudar_d(t_data *data, int op)
-{
-	int	x;
-	int	y;
-
-	mlx_destroy_image(data->mlx, data->map.player);
-	data->map.player = mlx_xpm_file_to_image(data->mlx,
-			PLAYER, &x, &y);
-	mudar_letra(data, 0, 1, op);
-	mudar_posicao(data, 0, 1);
-	data->map.x++;
-}
-
-void	mudar_s(t_data *data, int op)
-{
-	mudar_letra(data, 1, 0, op);
-	mudar_posicao(data, 1, 0);
-	data->map.y++;
-}
-
-void	mudar_w(t_data *data, int op)
-{
-	mudar_letra(data, -1, 0, op);
-	mudar_posicao(data, -1, 0);
-	data->map.y--;
-}
-
 int	key_handler(int keycode, t_data *data)
 {
 	int		op;

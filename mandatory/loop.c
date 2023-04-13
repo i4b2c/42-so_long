@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 13:50:38 by marvin            #+#    #+#             */
-/*   Updated: 2023/04/05 16:22:18 by icaldas          ###   ########.fr       */
+/*   Created: 2023/04/12 20:16:32 by marvin            #+#    #+#             */
+/*   Updated: 2023/04/12 20:16:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long_bonus.h"
 
-int	main(int ac, char **av)
+int	atualizar(t_data *data)
 {
-	t_data	data;
+	static int	j;
+	static int	i;
+	static int	k;
+	static int	l;
 
-	if (ac == 2)
-	{
-		if (!erro(av[1]) && !square_map(av))
-		{
-			ft_printf("movimentos: 0\n");
-			iniciar_jogo(&data, av);
-		}
-		else
-			write(1, "Error\n", 6);
-	}
+	check_sprite_porta(data, &j);
+	check_sprite_coin(data, &i);
+	l++;
+	k++;
+	i++;
 	return (0);
+}
+
+void	loop(t_data *data)
+{
+	mlx_hook(data->win, 2, 1, key_handler, data);
+	mlx_hook(data->win, 17, 1, mouse_hook, data);
+	mlx_loop(data->mlx);
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "../include/so_long_bonus.h"
 
 void	put_imagem(t_data *data, int op, int len_x, int len_y)
 {
@@ -28,8 +28,7 @@ void	put_imagem(t_data *data, int op, int len_x, int len_y)
 	{
 		data->map.x = len_x;
 		data->map.y = len_y;
-		mlx_put_image_to_window(data->mlx,
-			data->win, data->map.player, 64 * len_x, 64 * len_y);
+		colocar_fantasma_direcao(data, len_x, len_y);
 	}
 	else if (op == 4)
 		mlx_put_image_to_window(data->mlx,

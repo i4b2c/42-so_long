@@ -1,35 +1,50 @@
 NAME = so_long
-SRC = mandatory/check_end_key.c \
-      mandatory/encerrar.c \
-      mandatory/erro.c \
-      mandatory/extra.c \
-      mandatory/free.c \
-      mandatory/get_x_y.c \
-      mandatory/get.c \
-      mandatory/hook.c \
-      mandatory/iniciar.c \
-      mandatory/key.c \
-      mandatory/render.c \
-	  mandatory/erro_line.c \
-	  mandatory/main.c
+SRC =	mandatory/check_end_key.c \
+		mandatory/check_sprite.c \
+		mandatory/encerrar.c \
+		mandatory/erro_main.c \
+		mandatory/erro.c \
+		mandatory/erro1.c \
+		mandatory/erro2.c \
+		mandatory/erro3.c \
+		mandatory/erro4.c \
+		mandatory/erro5.c \
+		mandatory/extra.c \
+		mandatory/free.c \
+		mandatory/get_x_y.c \
+		mandatory/get.c \
+		mandatory/hook_change.c \
+		mandatory/hook.c \
+		mandatory/iniciar.c \
+		mandatory/key.c \
+		mandatory/loop.c \
+		mandatory/put_image.c \
+		mandatory/render.c \
+		mandatory/sprite.c \
+		mandatory/main.c
 
-SRC_BONUS = bonus/check_end_key.c \
-      		bonus/encerrar.c \
-      		bonus/extra.c \
-      		bonus/free.c \
-      		bonus/get_x_y.c \
-      		bonus/get.c \
-      		bonus/hook.c \
-      		bonus/iniciar.c \
-      		bonus/key.c \
-      		bonus/render.c \
-      		bonus/sprite.c \
-			bonus/erro_line.c \
+SRC_BONUS =	bonus/check_end_key.c \
+			bonus/check_sprite.c \
+			bonus/encerrar.c \
+			bonus/erro_main.c \
 			bonus/erro.c \
 			bonus/erro1.c \
 			bonus/erro2.c \
 			bonus/erro3.c \
-			bonus/erro_main.c \
+			bonus/erro4.c \
+			bonus/extra.c \
+			bonus/free.c \
+			bonus/get_x_y.c \
+			bonus/get.c \
+			bonus/hook_change.c \
+			bonus/hook.c \
+			bonus/iniciar.c \
+			bonus/inimigo.c \
+			bonus/key.c \
+			bonus/loop.c \
+			bonus/put_image.c \
+			bonus/render.c \
+			bonus/sprite.c \
 			bonus/main.c
 
 CC = cc

@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   erro5.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/28 13:50:38 by marvin            #+#    #+#             */
-/*   Updated: 2023/04/05 16:22:18 by icaldas          ###   ########.fr       */
+/*   Created: 2023/04/13 23:20:28 by marvin            #+#    #+#             */
+/*   Updated: 2023/04/13 23:20:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long_bonus.h"
+#include "../include/so_long.h"
 
-int	main(int ac, char **av)
+int	check_no_key_func(char *str)
 {
-	t_data	data;
+	int	i;
 
-	if (ac == 2)
+	i = 0;
+	while (str[i] && str[i] != '\n')
 	{
-		if (!erro(av[1]) && !square_map(av))
-		{
-			ft_printf("movimentos: 0\n");
-			iniciar_jogo(&data, av);
-		}
-		else
-			write(1, "Error\n", 6);
+		if (str[i] != '1' && str[i]  != '0'
+			&& str[i] != 'P' && str[i] != 'C'
+			&& str[i] != 'E')
+			return (1);
+		i++;
 	}
 	return (0);
 }
