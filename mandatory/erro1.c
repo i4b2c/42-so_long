@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long_bonus.h"
+#include "../include/so_long.h"
 
 int	check_dobro(int p, int e, int c)
 {
@@ -90,7 +90,9 @@ int	verificar_len_linha(char *str)
 	int		fd;
 	char	*s;
 	int		len;
+	int		temp;
 
+	temp = 0;
 	len = 0;
 	fd = open(str, O_RDONLY);
 	while (1)
@@ -99,10 +101,10 @@ int	verificar_len_linha(char *str)
 		if (!s)
 			break ;
 		if (len && len != ft_strlen(s))
-			return (1);
+			temp = 1;
 		len = ft_strlen(s);
 		free (s);
 	}
 	close (fd);
-	return (0);
+	return (temp);
 }

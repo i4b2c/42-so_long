@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long_bonus.h"
+#include "../include/so_long.h"
 
 void	sprite_porta(t_data *data, int i)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long_bonus.h"
+#include "../include/so_long.h"
 
 void	iniciar_jogo(t_data *data, char **av)
 {

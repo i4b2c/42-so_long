@@ -10,28 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long_bonus.h"
+#include "../include/so_long.h"
 
 int	erro(char *str)
 {
-	int	i;
-
-	i = 0;
 	if (verificar_ber(str))
-		i = 1;
+		return (1);
 	else if (erro_vazio(str))
-		i = 1;
+		return (1);
 	else if (extra(str))
-		i = 1;
+		return (1);
 	else if (verificar_x(str) || verificar_y(str))
-		i = 1;
+		return (1);
 	else if (verificar_linha(str) || verificar_no_key(str))
-		i = 1;
+		return (1);
 	else if (verificar_len_linha(str))
-		i = 1;
+		return (1);
 	else if (verificar_dobro(str))
-		i = 1;
+		return (1);
 	else if (check_path(str))
-		i = 1;
-	return (i);
+		return (1);
+	return (0);
 }

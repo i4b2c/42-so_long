@@ -61,3 +61,24 @@ int	verificar_linha(char *str)
 	close (fd);
 	return (retorno);
 }
+
+int	verificar_no_key(char *str)
+{
+	int		fd;
+	char	*s;
+	int		temp;
+
+	temp = 0;
+	fd = open(str, O_RDONLY);
+	while (1)
+	{
+		s = get_next_line(fd);
+		if (!s)
+			break ;
+		if (check_no_key_func(s))
+			temp = 1;
+		free (s);
+	}
+	close (fd);
+	return (temp);
+}

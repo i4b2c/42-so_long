@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 11:20:57 by icaldas           #+#    #+#             */
-/*   Updated: 2023/04/13 23:25:56 by marvin           ###   ########.fr       */
+/*   Updated: 2023/04/14 10:45:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,6 @@ void	colocar_imagem_door(t_data *data, int x);
 void	colocar_fantasma_direcao(t_data *data, int x, int y);
 
 //MAIN//
-int main(int ac, char **av);
+int		main(int ac, char **av);
 
 #endif

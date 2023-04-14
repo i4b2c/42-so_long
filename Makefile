@@ -32,6 +32,7 @@ SRC_BONUS =	bonus/check_end_key.c \
 			bonus/erro2.c \
 			bonus/erro3.c \
 			bonus/erro4.c \
+			bonus/erro5.c \
 			bonus/extra.c \
 			bonus/free.c \
 			bonus/get_x_y.c \

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long_bonus.h"
+#include "../include/so_long.h"
 
 char	*ft_strcpy(char *s1, char *s2)
 {
@@ -36,13 +36,13 @@ void	colocar_texto_e_acabar(int x, t_data *data)
 {
 	if (x == 1)
 	{
-		ft_printf("movimentos: %d\n",data->map.mov);
+		ft_printf("movimentos: %d\n", data->map.mov);
 		write(1, "You Won!!\n", 10);
 	}
 	else if (x == 2)
 	{
 		write(1, "You Died,Try Again!\n", 20);
-	ft_printf("movimentos: %d\n",data->map.mov);
+		ft_printf("movimentos: %d\n", data->map.mov);
 	}
 	encerrar_jogo(data);
 }

@@ -21,7 +21,7 @@ int	check_no_key_func(char *str)
 	{
 		if (str[i] != '1' && str[i] != '0'
 			&& str[i] != 'P' && str[i] != 'C'
-			&& str[i] != 'E')
+			&& str[i] != 'E' && str[i] != 'N')
 			return (1);
 		i++;
 	}

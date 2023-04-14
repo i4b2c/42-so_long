@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long_bonus.h"
+#include "../include/so_long.h"
 
 void	iniciar_line_y(int *fd, char *str, int *i)
 {
@@ -70,11 +70,11 @@ int	verificar_no_key(char *str)
 
 	temp = 0;
 	fd = open(str, O_RDONLY);
-	while	(1)
+	while (1)
 	{
 		s = get_next_line(fd);
 		if (!s)
-			break;
+			break ;
 		if (check_no_key_func(s))
 			temp = 1;
 		free (s);

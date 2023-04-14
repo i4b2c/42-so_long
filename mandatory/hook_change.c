@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long_bonus.h"
+#include "../include/so_long.h"
 
 void	mudar_a(t_data *data, int op)
 {
@@ -22,7 +22,7 @@ void	mudar_a(t_data *data, int op)
 			PLAYER_R, &y, &x);
 	mudar_letra(data, 0, -1, op);
 	mudar_posicao(data, 0, -1);
-	ft_printf("movimentos: %d\n",data->map.mov++);
+	ft_printf("movimentos: %d\n", data->map.mov++);
 	data->map.x--;
 }
 
@@ -36,7 +36,7 @@ void	mudar_d(t_data *data, int op)
 			PLAYER, &x, &y);
 	mudar_letra(data, 0, 1, op);
 	mudar_posicao(data, 0, 1);
-	ft_printf("movimentos: %d\n",data->map.mov++);
+	ft_printf("movimentos: %d\n", data->map.mov++);
 	data->map.x++;
 }
 
@@ -44,7 +44,7 @@ void	mudar_s(t_data *data, int op)
 {
 	mudar_letra(data, 1, 0, op);
 	mudar_posicao(data, 1, 0);
-	ft_printf("movimentos: %d\n",data->map.mov++);
+	ft_printf("movimentos: %d\n", data->map.mov++);
 	data->map.y++;
 }
 
@@ -52,6 +52,6 @@ void	mudar_w(t_data *data, int op)
 {
 	mudar_letra(data, -1, 0, op);
 	mudar_posicao(data, -1, 0);
-	ft_printf("movimentos: %d\n",data->map.mov++);
+	ft_printf("movimentos: %d\n", data->map.mov++);
 	data->map.y--;
 }
