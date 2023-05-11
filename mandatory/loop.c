@@ -12,21 +12,6 @@
 
 #include "../include/so_long.h"
 
-int	atualizar(t_data *data)
-{
-	static int	j;
-	static int	i;
-	static int	k;
-	static int	l;
-
-	check_sprite_porta(data, &j);
-	check_sprite_coin(data, &i);
-	l++;
-	k++;
-	i++;
-	return (0);
-}
-
 void	loop(t_data *data)
 {
 	mlx_hook(data->win, 2, 1, key_handler, data);

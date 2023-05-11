@@ -18,7 +18,6 @@ SRC =	mandatory/check_end_key.c \
 		mandatory/iniciar.c \
 		mandatory/key.c \
 		mandatory/loop.c \
-		mandatory/put_image.c \
 		mandatory/render.c \
 		mandatory/sprite.c \
 		mandatory/main.c
@@ -64,12 +63,12 @@ OBJ_BONUS = $(SRC_BONUS:%.c=%.o)
 
 all: $(NAME)
 $(NAME): $(OBJ)
-		@$(RM) $(OBJ_BONUS)
-		make -C libft/
+#		@$(RM) $(OBJ_BONUS)
+		@make --silent -C libft/
 		@$(CC) $(CFLAGS) $(SRC) $(LIBFT) $(LIBSRC) $(LIBFLAG) -o $(NAME)
 bonus: $(OBJ_BONUS)
-		@$(RM) $(OBJ)
-		make -C libft/
+#		@$(RM) $(OBJ)
+		@make --silent -C libft/
 		@$(CC) $(CFLAGS) $(SRC_BONUS) $(LIBFT) $(LIBSRC) $(LIBFLAG) -o $(NAME)_bonus
 clean:
 		@$(RM) $(OBJ)
@@ -77,7 +76,7 @@ clean:
 		@$(RM)
 minilibx:
 	@$(GIT)
-	make -C minilibx
+	@make --silent -C minilibx
 fclean: clean
 		@$(RM) $(NAME)
 		@$(RM) $(NAME)_bonus
