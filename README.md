@@ -21,3 +21,7 @@ A small and simple 2D game inspired at mario game
 #### Bonus
 
 ![example_so_long_bonus](https://github.com/i4b2c/42-so_long/assets/117470349/9a87cfbb-e9a0-4e16-bb74-7504975ba84e)
+
+## Tester
+
+If you want some tester for you project use this: https://github.com/augustobecker/so_long_tester.
